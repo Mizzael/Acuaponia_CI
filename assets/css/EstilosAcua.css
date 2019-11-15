@@ -1,0 +1,10 @@
+
+.fondo{
+    background: rgb(183, 238, 178);
+}
+.video{
+    
+    width: 100%;
+    z-index: -1;
+    
+}
