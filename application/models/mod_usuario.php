@@ -17,10 +17,10 @@
             }
         }
 
-        public function Ingresar($correo,$password){
+        function Ingresar($correo,$password){
             
-            $this->db->where('correo',$correo);
-            $this->db->where('passrwod',$password);
+            $this->db->where('us_correo',$correo);
+            $this->db->where('us_clave',$password);
             // $this->db
             // $this->db
 

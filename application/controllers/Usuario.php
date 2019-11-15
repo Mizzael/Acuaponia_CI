@@ -22,7 +22,7 @@ class Usuario extends CI_Controller{
 
         if(isset($_POST['password'])){
             if($this->mod_usuario->Ingresar($_POST['correo'],md5($_POST['password']))){
-                $this->load->view('Usuario/Status');
+                redirect(base_url().'Usuario/Status');
             }else{
                 $this->load->view('Usuario/Login',$data);
             }

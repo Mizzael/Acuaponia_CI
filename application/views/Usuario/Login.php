@@ -26,7 +26,7 @@
 
               <div class=" mb-2">
                 <label class="my-0 text-center" for="inputEmail">EMAIL</label>
-                <input type="email" id="inputEmail" class="form-control form-control-sm" required />
+                <input type="email" name="correo" id="inputEmail" class="form-control form-control-sm" autocomplete="off" required />
               </div>
 
               <div class="mt-4">
@@ -36,7 +36,7 @@
                     ¿Olvidó su contraseña?
                   </a>
                 </div>
-                <input type="password" id="inputContraseña" class="form-control form-control-sm" required />
+                <input type="password" name="password" id="inputContraseña" class="form-control form-control-sm" required />
                 <input type="submit" name="commit" value="INICIAR SESIÓN" tabindex="3" class="btn btn-success btn-block my-4 font-weight-bold"
                   data-disable-with="Iniciar">
               </div>
