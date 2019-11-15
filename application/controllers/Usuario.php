@@ -43,7 +43,7 @@ class Usuario extends CI_Controller{
                 'us_nombre'=>$this->input->post('nombre'),
                 'us_apellido'=>$this->input->post('apellido'),
                 'us_correo'=>$this->input->post('correo'),
-                'us_clave'=>$this->input->post('password'),
+                'us_clave'=>md5($this->input->post('password')),
                 'num_ser'=>$this->input->post('nserie')
             );
             $this->mod_usuario->insertar($data);
