@@ -16,5 +16,20 @@
                 $this->load->view('Usuario/Status',$data);
             }
         }
+
+        public function Ingresar($correo,$password){
+            
+            $this->db->where('correo',$correo);
+            $this->db->where('passrwod',$password);
+            // $this->db
+            // $this->db
+
+            $query= $this->db->get('usuarios');
+            if($query->num_rows()>0){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

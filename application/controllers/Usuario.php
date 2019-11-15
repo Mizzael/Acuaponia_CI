@@ -4,23 +4,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Usuario extends CI_Controller{
     
     function __construct(){
+        
         parent::__construct();
         $this->load->model('mod_usuario');
     }
 
     public function Register(){
+        
         $data['titulo']='Registro';
-
         $this->load->view('Usuario/Register',$data);
     }
 
     public function Login(){
+        
         $data['titulo']='Iniciar Sesión';
-
         $this->load->view('Usuario/Login',$data);
+
+        if(isset($_POST['password'])){
+            if($this->mod_usuario->Ingresar($_POST['correo'],md5($_POST['password']))){
+                $this->load->view('Usuario/Status');
+            }else{
+                $this->load->view('Usuario/Login',$data);
+            }
+        }
+
     }
 
     public function Status(){
+       
         $this->load->view('Usuario/Status');
     }
 
