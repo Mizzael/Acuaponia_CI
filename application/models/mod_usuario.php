@@ -24,19 +24,19 @@
             }
         }
 
-        public function Ingresar($correo,$password){
+        // public function Ingresar($correo,$password){
             
-            $this->db->where('us_correo',$correo);
-            $this->db->where('us_clave',$password);
+        //     $this->db->where('us_correo',$correo);
+        //     $this->db->where('us_clave',$password);
 
 
-            $query= $this->db->get('usuarios');
-            if($query->num_rows()>0){
-                return true;
-            }else{
-                return false;
-            }
-        }
+        //     $query= $this->db->get('usuarios');
+        //     if($query->num_rows()>0){
+        //         return true;
+        //     }else{
+        //         return false;
+        //     }
+        // }
 
         public function Login($correo, $password)
         {            			
