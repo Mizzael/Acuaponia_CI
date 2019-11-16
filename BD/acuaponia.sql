@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2019 a las 19:38:49
+-- Tiempo de generación: 16-11-2019 a las 21:34:27
 -- Versión del servidor: 10.1.40-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -42,9 +42,41 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_us`, `us_nombre`, `us_apellido`, `us_correo`, `us_clave`, `num_ser`) VALUES
-(11, 'Jonathan Missael', 'Jimenez Gutierrez', 'missael@ucol.mx', '123', '124'),
-(12, 'Missael', 'Jimenez', 'gg@gmail.com', '123', '123'),
-(13, 'Julioa', 'Missale', 'jul@ucol.mx', '123', '1212341231');
+(16, 'Missael', 'Jimenez', 'missael@ucol.mx', '202cb962ac59075b964b07152d234b70', '12345'),
+(21, 'jj', '123', '4j2@ucol.mx', '202cb962ac59075b964b07152d234b70', '1231322132'),
+(22, 'missael', 'puto', 'or2@ucol.mx', '202cb962ac59075b964b07152d234b70', '1232112311'),
+(23, 'DSA', 'ASD', 'ASD@UCOL.MX', '202cb962ac59075b964b07152d234b70', 'SAD21312');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `variables`
+--
+
+CREATE TABLE `variables` (
+  `Fechas` date NOT NULL,
+  `TemperaturaT` int(11) NOT NULL,
+  `TemperaturaA` int(11) NOT NULL,
+  `HumedadAgua` int(11) NOT NULL,
+  `HumedadAmbiente` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `variables`
+--
+
+INSERT INTO `variables` (`Fechas`, `TemperaturaT`, `TemperaturaA`, `HumedadAgua`, `HumedadAmbiente`) VALUES
+('0000-00-00', 18, 20, 82, 16),
+('0000-00-00', 10, 11, 12, 13),
+('0000-00-00', 15, 16, 16, 16),
+('0000-00-00', 10, 11, 12, 13),
+('0000-00-00', 15, 16, 16, 16),
+('0000-00-00', 20, 85, 45, 12),
+('0000-00-00', 20, 85, 45, 12),
+('0000-00-00', 16, 18, 80, 12),
+('0000-00-00', 58, 52, 10, 10),
+('0000-00-00', 16, 18, 80, 12),
+('0000-00-00', 58, 52, 10, 10);
 
 --
 -- Índices para tablas volcadas
@@ -64,7 +96,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_us` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_us` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
