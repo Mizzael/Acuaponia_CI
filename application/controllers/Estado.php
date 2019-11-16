@@ -7,6 +7,7 @@ class Estado extends CI_Controller{
         
         parent::__construct();
         $this->db->initialize();
+        // /Hooa
     }
 
     public function Capturas(){
