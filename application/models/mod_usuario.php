@@ -1,6 +1,13 @@
 <?php
     class mod_usuario extends CI_MODEL{
 
+        public function __construct()
+        {
+            parent::__construct();
+
+            $this->db->initialize();
+        }
+
         function insertar($data){
 
             //Verificar que no exista otro correo
@@ -21,8 +28,7 @@
             
             $this->db->where('us_correo',$correo);
             $this->db->where('us_clave',$password);
-            // $this->db
-            // $this->db
+
 
             $query= $this->db->get('usuarios');
             if($query->num_rows()>0){
@@ -30,6 +36,19 @@
             }else{
                 return false;
             }
+        }
+
+        public function Login($correo, $password)
+        {            			
+            $response = 
+                $this->db
+                    ->select('*')
+                    ->from('usuarios')
+                    ->where("us_correo = '".$correo."'")
+                    ->where("us_clave = '".$password."'")
+                    ->get();
+
+            return ($response->num_rows() > 0) ? $response->row(0) : false;
         }
     }
 ?>

@@ -6,6 +6,7 @@ class Usuario extends CI_Controller{
     function __construct(){
         
         parent::__construct();
+        // $this->ValidarInicioSesion();
         $this->load->model('mod_usuario');
     }
 
@@ -32,19 +33,37 @@ class Usuario extends CI_Controller{
         //         redirect(base_url().'Usuario/Login');
         //     }
         // }
+
+        if ($this->input->post('correo')&&$this->input->post('password')){
+            $this->load->model('mod_usuario');
+            
+            $usuario = $this->mod_usuario->Login($this->input->post('correo'),md5($this->input->post('password')));
+            if($usuario){
+
+                $this->session->set_userdata(
+                    'user', 
+                    array(
+                        'id' => $usuario->id_us,
+                        'correo' => $usuario->us_correo,
+                    )
+                );
+
+                redirect('Estado/Capturas', 'redirect');
+            }          
+        }else{
+            $this->session->set_flashdata('response', array('message' => 'El correo electrónico y/o contraseña es/son incorrecto(s)'));
+        
+        }
+
     }
 
     public function Logout(){
     
     session_destroy();
-    redirect('Inicio/index','refresh');
-   }
-    
+    //redirect('Inicio/index','refresh');
+    redirect(base_url(),'refresh');
 
-    public function Status(){
-       
-        $this->load->view('Usuario/Status');
-    }
+   }
 
     public function AgregarUsuario(){
         $this->form_validation->set_rules('nombre','Nombre','required');
