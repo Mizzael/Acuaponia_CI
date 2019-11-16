@@ -20,7 +20,7 @@
 
           <div class="mt-1 mb-1 text-muted">
             <div>
-              <h2 class="mb-4 font-weight-bold">Iniciar sesión</h2>
+              <h2 class="mb-4 font-weight-bold">Recuperar Contraseña</h2>
             </div>
             <div class="text-left form-group">
 
@@ -28,25 +28,12 @@
                 <label class="my-0 text-center" for="inputEmail">EMAIL</label>
                 <input type="email" name="correo" id="inputEmail" class="form-control form-control-sm" autocomplete="off" required />
               </div>
-
               <div class="mt-4">
-                <div class="d-flex justify-content-between my-0 mb-0">
-                  <label class="my-0 text-center" for="inputPassword">CONTRASEÑA</label>
-                  <a href="R<?php echo base_url(); ?>Usuario/RecuperarPassword" class="font-weight-light">
-                    ¿Olvidó su contraseña?
-                  </a>
-                </div>
-                <input type="password" name="password" id="inputContraseña" class="form-control form-control-sm" required />
-                <input type="submit" name="commit" value="INICIAR SESIÓN" class="btn btn-success btn-block my-4 font-weight-bold"
-                  data-disable-with="Iniciar">
+                <input type="submit" name="commit" value="Enviar Contraseña" class="btn btn-success btn-block my-4 font-weight-bold">
               </div>
               <hr class="form-divider">
             </div>
           </div>
-          <p class="d-flex justify-content-between my-3 col-md font-weight-light">
-            ¿Sin cuenta?
-            <a href="<?php echo base_url(); ?>Usuario/Register">Registrate gratis</a>
-          </p>
         </form>
       </section>
     </main>

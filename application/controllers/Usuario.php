@@ -16,6 +16,12 @@ class Usuario extends CI_Controller{
         $this->load->view('Usuario/Register',$data);
     }
 
+    public function RecuperarPassword(){
+        $data['titulo']='Recuperar Contraseña';
+            $this->load->view->('Usuario/RecuperarPassword');
+    }
+
+
     public function Login(){
         
         $data['titulo']='Iniciar Sesión';

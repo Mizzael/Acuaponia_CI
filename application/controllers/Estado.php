@@ -19,6 +19,5 @@ class Estado extends CI_Controller{
             $this->load->view('Shared/footer');
         }
     }
-
 }
 ?>
