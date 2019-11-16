@@ -20,7 +20,7 @@
                 
             }else{
                 $this->db->insert('usuarios',$data);
-                $this->load->view('Usuario/Status',$data);
+                $this->load->view('Estado/Status',$data);
             }
         }
 

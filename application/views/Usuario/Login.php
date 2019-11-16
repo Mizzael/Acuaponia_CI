@@ -37,7 +37,7 @@
                   </a>
                 </div>
                 <input type="password" name="password" id="inputContraseña" class="form-control form-control-sm" required />
-                <input type="submit" name="commit" value="INICIAR SESIÓN" tabindex="3" class="btn btn-success btn-block my-4 font-weight-bold"
+                <input type="submit" name="commit" value="INICIAR SESIÓN" class="btn btn-success btn-block my-4 font-weight-bold"
                   data-disable-with="Iniciar">
               </div>
               <hr class="form-divider">

@@ -7,16 +7,18 @@ class Estado extends CI_Controller{
         
         parent::__construct();
         $this->db->initialize();
-        // /Hooa
     }
 
     public function Capturas(){
-       
-        // $this->ValidarInicioSesion();
-
-        $this->load->view('Estado/Status');
+        
+        $data['titulo']='Estado del Sitema';
+           $this->load->view('Estado/Status',$data);
     }
 
 }
+// redirect('Usuario/Login', 'redirect');
 
+
+// $data['titulo']='Iniciar Sesión';
+//             $this->load->view('Estado/Caputas',$data);
 ?>
