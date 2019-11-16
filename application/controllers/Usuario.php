@@ -23,7 +23,7 @@ class Usuario extends CI_Controller{
         if($this->session->userdata('us_correo')){
             redirect('Usuario/Status');
         }
-        
+
         if(isset($_POST['password'])){
             if($this->mod_usuario->Ingresar($_POST['correo'],md5($_POST['password']))){
                 $this->session->set_userdata('correo',$_POST['correo']);
@@ -35,17 +35,11 @@ class Usuario extends CI_Controller{
     }
 
     public function Logout(){
+    
         session_destroy();
-        
-        // $this->session->sess_destroy();
-       // redirect(base_url().'Inicio/index','refresh');
-       $data['titulo']='Inicio';
-        
-       $this->load->view('Shared/header',$data);
-           $this->load->view('Inicio/Index');
-       $this->load->view('Shared/footer');
+       redirect('Inicio/index','refresh');
    }
-    }
+    
 
     public function Status(){
        
