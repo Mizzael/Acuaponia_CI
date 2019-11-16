@@ -20,24 +20,24 @@ class Usuario extends CI_Controller{
         $data['titulo']='Iniciar Sesión';
         $this->load->view('Usuario/Login',$data);
 
-        if($this->session->userdata('us_correo')){
-            redirect('Usuario/Status');
-        }
+        // if($this->session->userdata('us_correo')){
+        //     redirect('Usuario/Status');
+        // }
 
-        if(isset($_POST['password'])){
-            if($this->mod_usuario->Ingresar($_POST['correo'],md5($_POST['password']))){
-                $this->session->set_userdata('correo',$_POST['correo']);
-                redirect(base_url().'Usuario/Status');
-            }else{
-                redirect(base_url().'Usuario/Login');
-            }
-        }
+        // if(isset($_POST['password'])){
+        //     if($this->mod_usuario->Ingresar($_POST['correo'],md5($_POST['password']))){
+        //         $this->session->set_userdata('correo',$_POST['correo']);
+        //         redirect(base_url().'Usuario/Status');
+        //     }else{
+        //         redirect(base_url().'Usuario/Login');
+        //     }
+        // }
     }
 
     public function Logout(){
     
-        session_destroy();
-       redirect('Inicio/index','refresh');
+    session_destroy();
+    redirect('Inicio/index','refresh');
    }
     
 
