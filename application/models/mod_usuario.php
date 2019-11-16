@@ -17,7 +17,7 @@
             }
         }
 
-        function Ingresar($correo,$password){
+        public function Ingresar($correo,$password){
             
             $this->db->where('us_correo',$correo);
             $this->db->where('us_clave',$password);
