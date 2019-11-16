@@ -11,8 +11,12 @@ class Estado extends CI_Controller{
 
     public function Capturas(){
         
-        $data['titulo']='Estado del Sitema';
+        if(!$this->session->has_userdata('user')){
+            redirect(base_url());
+        }else{
+            $data['titulo']='Estado del Sitema';
            $this->load->view('Estado/Status',$data);
+        }
     }
 
 }
