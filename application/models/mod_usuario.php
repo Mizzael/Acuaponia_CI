@@ -20,7 +20,10 @@
                 
             }else{
                 $this->db->insert('usuarios',$data);
-                $this->load->view('Estado/Status',$data);
+                
+                $data['titulo']='Estado del Sitema';
+                    $this->load->view('Estado/Status',$data);
+                $this->load->view('Shared/footer');
             }
         }
 

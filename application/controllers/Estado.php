@@ -15,14 +15,10 @@ class Estado extends CI_Controller{
             redirect(base_url());
         }else{
             $data['titulo']='Estado del Sitema';
-           $this->load->view('Estado/Status',$data);
+                $this->load->view('Estado/Status',$data);
+            $this->load->view('Shared/footer');
         }
     }
 
 }
-// redirect('Usuario/Login', 'redirect');
-
-
-// $data['titulo']='Iniciar Sesión';
-//             $this->load->view('Estado/Caputas',$data);
 ?>
