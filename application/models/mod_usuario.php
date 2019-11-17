@@ -52,16 +52,11 @@
             return ($response->num_rows() > 0) ? $response->row(0) : false;
         }
 
-        // public function RecuperarPsd($correopsd){
-        //     $correoDuplicado=$this->db->get_where('usuarios',array('us_correo'=>$correopsd['us_correo']));
-        //     if($correoDuplicado->num_rows()>0){
-        //         // var_dump($correoDuplicado);
-        //         $data['titulo']='Cambiar Contraseña';
-        //             $this->load->view('Usuario/CambiarPassword',$data);
-        //     }else{
-        //         // $data['titulo']='Cambiar Contraseña';
-        //         //     $this->load->view('Usuario/RecuperarPassword',$data);
-        //     }
-        // }
-    }
+        public function RecuperarPsd($correopsd){
+            $correoDuplicado=$this->db->get_where('usuarios',array('us_correo'=>$correopsd['us_correo']));
+            if($correoDuplicado->num_rows()>0){
+               redirect(base_url().'Usuario/CambiarPassword');
+            }
+        }
+}
 ?>
