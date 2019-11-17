@@ -52,11 +52,19 @@
             return ($response->num_rows() > 0) ? $response->row(0) : false;
         }
 
-        public function ObtenerCorreo($correopsd){
-            $query=$this->db->get_where('usuarios',array('us_correo'=>$correopsd['us_correo']));
-            if($query->num_rows()>0){
-                redirect(base_url().'Usuario/NuevaPassword');
-            }
+        public function VerificarCorreo($correo){
+            // $query=$this->db->get_where('usuarios',array('us_correo'=>$correopsd['us_correo']));
+            // if($query->num_rows()>0){
+            //     redirect(base_url().'Usuario/NuevaPassword');
+            // }
+            $query = 
+                $this->db
+                    ->select('*')
+                    ->from('usuarios')
+                    ->where("us_correo = '".$correo."'")
+                    ->get();
+
+            return ($query->num_rows() > 0) ? $query->row(0) : false;
         }
 
         public function NuevaPassword($nuevaPsd){

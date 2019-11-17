@@ -26,7 +26,7 @@
 
               <div class=" mb-2">
                 <label class="my-0 text-center" for="inputEmail">EMAIL</label>
-                <input type="email" name="correopsd" id="inputEmail" class="form-control form-control-sm" autocomplete="off" required />
+                <input type="email" name="correo" id="inputEmail" class="form-control form-control-sm" autocomplete="off" required />
               </div>
               <div class="mt-4">
                 <input type="submit" name="commit" value="Recuperar" class="btn btn-success btn-block my-4 font-weight-bold">

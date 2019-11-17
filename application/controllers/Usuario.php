@@ -19,15 +19,37 @@ class Usuario extends CI_Controller{
         $data['titulo']='Correo';
             $this->load->view('Usuario/ObtenerCorreo',$data);
             
-        $correopsd=array(
-            'us_correo'=>$this->input->post('correopsd')
-        );
-        $this->mod_usuario->ObtenerCorreo($correopsd);
+        if ($this->input->post('correo')){
+            $this->load->model('mod_usuario');
+            
+            $usuario = $this->mod_usuario->VerificarCorreo($this->input->post('correo'));
+            if($usuario){
+
+                $this->session->set_userdata(
+                    'user', 
+                    array
+                    (
+                        'id' => $usuario->id_us,
+                        'correo' => $usuario->us_correo,
+                    )
+                );
+
+                redirect('Usuario/NuevaPassword', 'redirect');
+            }          
+        }else{
+            $this->session->set_flashdata('response', array('message' => 'El correo electrónico y/o contraseña es/son incorrecto(s)'));
+        }
     }
 
     public function NuevaPassword(){
-        $data['titulo']='Cambiar Contraseña';
-            $this->load->view('Usuario/NuevaPassword',$data);
+            
+        if(!$this->session->has_userdata('user')){
+                redirect(base_url());
+            }else{
+                $data['titulo']='Cambiar Contraseña';
+                    $this->load->view('Usuario/NuevaPassword',$data);
+                $this->load->view('Shared/footer');
+            }
     }
 
     public function CambiarPassword(){
@@ -82,7 +104,6 @@ class Usuario extends CI_Controller{
             }          
         }else{
             $this->session->set_flashdata('response', array('message' => 'El correo electrónico y/o contraseña es/son incorrecto(s)'));
-        
         }
 
     }
