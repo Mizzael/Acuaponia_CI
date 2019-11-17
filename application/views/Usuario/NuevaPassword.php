@@ -34,7 +34,7 @@
                   <label class="my-0 text-center" for="inputPassword">Confirmar Contraseña</label>
                 </div>
                 <input type="password" name="confirm_password" id="inputContraseña" class="form-control form-control-sm" required />
-                <input type="submit" name="commit" value="Nueva Contraseña" class="btn btn-success btn-block my-4 font-weight-bold"
+                <input type="submit" name="commit" value="Cambiar Contraseña" class="btn btn-success btn-block my-4 font-weight-bold"
                   data-disable-with="Iniciar">
               </div>
             </div>

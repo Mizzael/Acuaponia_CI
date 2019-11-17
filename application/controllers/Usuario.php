@@ -16,20 +16,34 @@ class Usuario extends CI_Controller{
         $this->load->view('Usuario/Register',$data);
     }
 
-        public function RecuperarPassword(){
-            $data['titulo']='Recuperar Contraseña';
-                $this->load->view('Usuario/RecuperarPassword',$data);
-                
-            $correopsd=array(
-                'us_correo'=>$this->input->post('correopsd')
-            );
-            $this->mod_usuario->RecuperarPsd($correopsd);
-        }
+    public function RecuperarPassword(){
+        $data['titulo']='Recuperar Contraseña';
+            $this->load->view('Usuario/RecuperarPassword',$data);
+            
+        $correopsd=array(
+            'us_correo'=>$this->input->post('correopsd')
+        );
+        $this->mod_usuario->RecuperarPsd($correopsd);
+    }
 
-        public function CambiarPassword(){
-            $data['titulo']='Cambiar Contraseña';
-                $this->load->view('Usuario/CambiarPassword',$data);
+    public function NuevaPassword(){
+        $data['titulo']='Cambiar Contraseña';
+            $this->load->view('Usuario/NuevaPassword',$data);
+    }
+
+    public function CambiarPassword(){
+        $this->form_validation->set_rules('password','Contraseña','required');
+        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
+
+        if($this->form_validation->run()==false){
+            redirect(base_url().'Usuario/NuevaPassword');
+        }else{
+            $nuevaPsd=array(
+                'us_clave'=>md5($this->input->post('password')),
+            );
+            $this->mod_usuario->NuevaPassword($nuevaPsd);
         }
+    }
 
 
     public function Login(){
@@ -79,6 +93,7 @@ class Usuario extends CI_Controller{
     }
 
     public function AgregarUsuario(){
+        
         $this->form_validation->set_rules('nombre','Nombre','required');
         $this->form_validation->set_rules('apellido','Apellido','required');
         $this->form_validation->set_rules('correo','Email','required');
