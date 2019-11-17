@@ -60,7 +60,9 @@
         }
 
         public function NuevaPassword($nuevaPsd){
-            $this->db->insert('usuarios',$nuevaPsd);
+            var_dump($correopsd);
+            $this->db->where('us_clave',$nuevaPsd);
+            $query=$this->db->update('usuarios',$nuevaPsd);
         }
 }
 ?>

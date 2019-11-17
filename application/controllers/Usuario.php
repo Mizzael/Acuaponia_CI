@@ -45,7 +45,6 @@ class Usuario extends CI_Controller{
         }
     }
 
-
     public function Login(){
         
         $data['titulo']='Iniciar Sesión';
