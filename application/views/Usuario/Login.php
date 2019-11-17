@@ -13,7 +13,7 @@
   <div class="container">
     <main>
       <section>
-        <form class="form-signin pr-5 pt-3 pb-3 pl-5 border bg-light" method="POST">
+        <form class="form-signin pr-5 pt-3 pb-3 pl-5 border rounded bg-light" method="POST">
           <div class="separador mb-0">
             <img class="mb-3" src=" <?php echo base_url(); ?>assets/image/logoPI.png" alt="" width="70" height="85" />
           </div>
@@ -32,7 +32,7 @@
               <div class="mt-4">
                 <div class="d-flex justify-content-between my-0 mb-0">
                   <label class="my-0 text-center" for="inputPassword">CONTRASEÑA</label>
-                  <a href="R<?php echo base_url(); ?>Usuario/RecuperarPassword" class="font-weight-light">
+                  <a href="<?php echo base_url(); ?>Usuario/RecuperarPassword" class="font-weight-light">
                     ¿Olvidó su contraseña?
                   </a>
                 </div>

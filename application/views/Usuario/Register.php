@@ -44,20 +44,20 @@
             </div>
             </div>
             <div class="form-group col-md-4 ">
-              <label for="inputState">Numero de serie:</label>
+              <label for="inputState">Número de serie:</label>
               <input type="text" class="form-control" placeholder="N° serie" name="nserie" autocomplete="off" required>
             </div>
             <div class="form-group">
                 <div class="form-check ">
                   <input class="form-check-input" type="checkbox" id="gridCheck" required>
-                  <label class="form-check-label" for="gridCheck">Acepto terminos y condiciones</label>
+                  <label class="form-check-label" for="gridCheck">Acepto términos y condiciones</label>
                 </div>
             </div>
             <input type="submit" name="commit" value="CREAR UNA CUENTA" tabindex="3" class="btn btn-success  font-weight-bold col-md-4" data-disable-with="Iniciar">
             <hr class="form-divider">
             <p class="d-flex justify-content-between my-3 col-md font-weight-light">
               Ya tienes una cuenta?
-              <a href="<?php echo base_url(); ?>Usuario/Login">Inicia sesión</a>
+              <a href="<?php echo base_url(); ?>Usuario/Login">Iniciar sesión</a>
             </p>
           </div>
           </div>   

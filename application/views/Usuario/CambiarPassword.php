@@ -20,16 +20,22 @@
 
           <div class="mt-1 mb-1 text-muted">
             <div>
-              <h2 class="mb-4 font-weight-bold">Recupera tú Contraseña</h2>
+              <h2 class="mb-4 font-weight-bold">Ingresa tú Nueva Contraseña</h2>
             </div>
             <div class="text-left form-group">
-
-              <div class=" mb-2">
-                <label class="my-0 text-center" for="inputEmail">EMAIL</label>
-                <input type="email" name="correopsd" id="inputEmail" class="form-control form-control-sm" autocomplete="off" required />
+              <div class="mt-4">
+                <div class="d-flex justify-content-between my-0 mb-0">
+                  <label class="my-0 text-center" for="inputPassword">Contraseña</label>
+                </div>
+                <input type="password" name="password" id="inputContraseña" class="form-control form-control-sm" required />
               </div>
               <div class="mt-4">
-                <input type="submit" name="commit" value="Recuperar" class="btn btn-success btn-block my-4 font-weight-bold">
+                <div class="d-flex justify-content-between my-0 mb-0">
+                  <label class="my-0 text-center" for="inputPassword">Confirmar Contraseña</label>
+                </div>
+                <input type="password" name="confirm_password" id="inputContraseña" class="form-control form-control-sm" required />
+                <input type="submit" name="commit" value="Nueva Contraseña" class="btn btn-success btn-block my-4 font-weight-bold"
+                  data-disable-with="Iniciar">
               </div>
             </div>
           </div>

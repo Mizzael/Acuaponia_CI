@@ -16,10 +16,20 @@ class Usuario extends CI_Controller{
         $this->load->view('Usuario/Register',$data);
     }
 
-    public function RecuperarPassword(){
-        $data['titulo']='Recuperar Contraseña';
-            $this->load->view->('Usuario/RecuperarPassword');
-    }
+        // public function RecuperarPassword(){
+        //     $data['titulo']='Recuperar Contraseña';
+        //         $this->load->view('Usuario/RecuperarPassword',$data);
+                
+        //     $correopsd=array(
+        //         'us_correo'=>$this->input->post('correopsd')
+        //     );
+        //     $this->mod_usuario->RecuperarPsd($correopsd);
+        // }
+
+        // public function CambiarPassword(){
+        //     $data['titulo']='Cambiar Contraseña';
+        //         $this->load->view('Usuario/CambiarPassword',$data);
+        // }
 
 
     public function Login(){
@@ -64,12 +74,9 @@ class Usuario extends CI_Controller{
     }
 
     public function Logout(){
-    
-    session_destroy();
-    //redirect('Inicio/index','refresh');
-    redirect(base_url(),'refresh');
-
-   }
+        session_destroy();
+        redirect(base_url(),'refresh');
+    }
 
     public function AgregarUsuario(){
         $this->form_validation->set_rules('nombre','Nombre','required');
