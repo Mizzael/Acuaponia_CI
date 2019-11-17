@@ -32,7 +32,7 @@
               <div class="mt-4">
                 <div class="d-flex justify-content-between my-0 mb-0">
                   <label class="my-0 text-center" for="inputPassword">CONTRASEÑA</label>
-                  <a href="<?php echo base_url(); ?>Usuario/RecuperarPassword" class="font-weight-light">
+                  <a href="<?php echo base_url(); ?>Usuario/ObtenerCorreo" class="font-weight-light">
                     ¿Olvidó su contraseña?
                   </a>
                 </div>

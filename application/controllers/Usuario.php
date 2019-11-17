@@ -6,7 +6,6 @@ class Usuario extends CI_Controller{
     function __construct(){
         
         parent::__construct();
-        // $this->ValidarInicioSesion();
         $this->load->model('mod_usuario');
     }
 
@@ -16,14 +15,14 @@ class Usuario extends CI_Controller{
         $this->load->view('Usuario/Register',$data);
     }
 
-    public function RecuperarPassword(){
-        $data['titulo']='Recuperar Contraseña';
-            $this->load->view('Usuario/RecuperarPassword',$data);
+    public function ObtenerCorreo(){
+        $data['titulo']='Correo';
+            $this->load->view('Usuario/ObtenerCorreo',$data);
             
         $correopsd=array(
             'us_correo'=>$this->input->post('correopsd')
         );
-        $this->mod_usuario->RecuperarPsd($correopsd);
+        $this->mod_usuario->ObtenerCorreo($correopsd);
     }
 
     public function NuevaPassword(){
@@ -32,6 +31,7 @@ class Usuario extends CI_Controller{
     }
 
     public function CambiarPassword(){
+        
         $this->form_validation->set_rules('password','Contraseña','required');
         $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
 
@@ -71,7 +71,8 @@ class Usuario extends CI_Controller{
 
                 $this->session->set_userdata(
                     'user', 
-                    array(
+                    array
+                    (
                         'id' => $usuario->id_us,
                         'correo' => $usuario->us_correo,
                     )

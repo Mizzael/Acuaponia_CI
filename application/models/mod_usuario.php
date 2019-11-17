@@ -52,15 +52,15 @@
             return ($response->num_rows() > 0) ? $response->row(0) : false;
         }
 
-        public function RecuperarPsd($correopsd){
-            $correoDuplicado=$this->db->get_where('usuarios',array('us_correo'=>$correopsd['us_correo']));
-            if($correoDuplicado->num_rows()>0){
-               redirect(base_url().'Usuario/NuevaPassword');
+        public function ObtenerCorreo($correopsd){
+            $query=$this->db->get_where('usuarios',array('us_correo'=>$correopsd['us_correo']));
+            if($query->num_rows()>0){
+                redirect(base_url().'Usuario/NuevaPassword');
             }
         }
 
         public function NuevaPassword($nuevaPsd){
-            var_dump($correopsd);
+        
             $this->db->where('us_clave',$nuevaPsd);
             $query=$this->db->update('usuarios',$nuevaPsd);
         }
