@@ -55,8 +55,14 @@
         public function RecuperarPsd($correopsd){
             $correoDuplicado=$this->db->get_where('usuarios',array('us_correo'=>$correopsd['us_correo']));
             if($correoDuplicado->num_rows()>0){
-               redirect(base_url().'Usuario/CambiarPassword');
+               redirect(base_url().'Usuario/NuevaPassword');
             }
+        }
+
+        public function NuevaPassword($nuevaPsd){
+            var_dump($correopsd);
+            $this->db->where('us_clave',$nuevaPsd);
+            $query=$this->db->update('usuarios',$nuevaPsd);
         }
 }
 ?>
