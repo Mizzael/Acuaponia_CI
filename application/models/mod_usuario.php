@@ -20,10 +20,6 @@
                 
             }else{
                 $this->db->insert('usuarios',$data);
-                
-                // $data['titulo']='Estado del Sitema';
-                //     $this->load->view('Estado/Status',$data);
-                // $this->load->view('Shared/footer');
                 $usuario = $this->mod_usuario->Login($this->input->post('correo'),md5($this->input->post('password')));
                     if($usuario){
                         $this->session->set_userdata(
@@ -42,20 +38,6 @@
             }
         }
 
-        // public function Ingresar($correo,$password){
-            
-        //     $this->db->where('us_correo',$correo);
-        //     $this->db->where('us_clave',$password);
-
-
-        //     $query= $this->db->get('usuarios');
-        //     if($query->num_rows()>0){
-        //         return true;
-        //     }else{
-        //         return false;
-        //     }
-        // }
-
         public function Login($correo, $password){            			
             $response = 
                 $this->db
@@ -69,10 +51,6 @@
         }
 
         public function VerificarCorreo($correo){
-            // $query=$this->db->get_where('usuarios',array('us_correo'=>$correopsd['us_correo']));
-            // if($query->num_rows()>0){
-            //     redirect(base_url().'Usuario/NuevaPassword');
-            // }
             $query = 
                 $this->db
                     ->select('*')
