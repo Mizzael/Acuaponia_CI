@@ -42,7 +42,7 @@
 <br>
 <br>
   <div class="text-center">
-    <button class="btn btn-outline-primary my-2 my-sm-0" type="button"  id="BtnObtener">Obtener Datos</button>
+    <button class="btn btn-outline-primary my-2 my-sm-0" type="button"  id="BtnObtener">Obtener Lecturas</button>
   </div>
 
   <div id="Grafica">
@@ -53,6 +53,11 @@
   var Fecha=[];
   var TemR=[];
   var HumR=[];
+  var HumT=[];
+  var TemA=[];
+
+  var BgColor=[];
+  var BgBorder=[];
 
     $('#BtnObtener').click(function(){
       $.post("<?php echo base_url(); ?>Estado/ObtenerLecturas",
@@ -63,11 +68,30 @@
         Fecha=[];
         TemR=[];
         HumR=[];
+        HumT=[];
+        TemA=[];
+
+        BgColor=[];
+        BgBorder=[];
 
         $.each(obj,function(i,item){
+
+          var r = Math.random() * 255;
+				  r = Math.round(r);
+
+          var g = Math.random() * 255;
+          g = Math.round(g);
+
+          var b = Math.random() * 255;
+          b = Math.round(b);
+
           Fecha.push(item.lec_fechahora);
           TemR.push(item.lec_TemR);
           HumR.push(item.lec_HumR);
+          HumT.push(item.lec_HumT);
+          TemA.push(item.lec_TemA);
+          BgColor.push('rgba('+r+','+g+','+b+', 0.8)');
+          BgBorder.push('rgba('+r+','+g+','+b+', 1)')
         });
 
         $('#myChart').remove();
@@ -75,17 +99,17 @@
         
         var ctx = $('#myChart');
         var chart = new Chart(ctx, {
-          type: 'line',
+          type: 'bar',//Puede variar poniendo line.
           data: 
           {
             labels: Fecha,
             datasets:[
             {
-              label: "Temperatura Relativa",
+              label: "Temperatura Tierra",
               fill: true,
               lineTension: 0.1,
-              backgroundColor: "rgba(175,192,192,0.4)",
-              borderColor: "rgba(75,192,192,1)",
+              backgroundColor: BgColor,
+              borderColor: BgBorder,
               borderCapStyle: 'butt',
               borderDash: [],
               borderDashOffset: 0.0,
@@ -102,28 +126,72 @@
               data: TemR,
               spanGaps: false,
             },
-                {
-                  label: "Humedad Relativa",
-                  fill: true,
-                  lineTension: 0.1,
-                  backgroundColor: "rgba(255,99,132,0.4)",
-                  borderColor: "rgba(75,192,192,1)",
-                  borderCapStyle: 'butt',
-                  borderDash: [],
-                  borderDashOffset: 0.0,
-                  borderJoinStyle: 'miter',
-                  pointBorderColor: "rgba(75,192,192,1)",
-                  pointBackgroundColor: "#fff",
-                  pointBorderWidth: 10,
-                  pointHoverRadius: 5,
-                  pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                  pointHoverBorderColor: "rgba(220,220,220,1)",
-                  pointHoverBorderWidth: 5,
-                  pointRadius: 1,
-                  pointHitRadius: 10,
-                  data: HumR,
-                  spanGaps: false,
-                }
+            {
+              label: "Humedad Ambiente",
+              fill: true,
+              lineTension: 0.1,
+              backgroundColor: BgColor,
+              borderColor: BgBorder,
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "rgba(75,192,192,1)",
+              pointBackgroundColor: "#fff",
+              pointBorderWidth: 10,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "rgba(75,192,192,1)",
+              pointHoverBorderColor: "rgba(220,220,220,1)",
+              pointHoverBorderWidth: 5,
+              pointRadius: 1,
+              pointHitRadius: 10,
+              data: HumR,
+              spanGaps: false,
+            },
+            {
+              label: "Humedad Tierra",
+              fill: true,
+              lineTension: 0.1,
+              backgroundColor: BgColor,
+              borderColor: BgBorder,
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "rgba(75,192,192,1)",
+              pointBackgroundColor: "#fff",
+              pointBorderWidth: 10,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "rgba(75,192,192,1)",
+              pointHoverBorderColor: "rgba(220,220,220,1)",
+              pointHoverBorderWidth: 5,
+              pointRadius: 1,
+              pointHitRadius: 10,
+              data: HumT,
+              spanGaps: false,
+            },
+            {
+              label: "Temperatura Ambiente",
+              fill: true,
+              lineTension: 0.1,
+              backgroundColor: BgColor,
+              borderColor: BgBorder,
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "rgba(75,192,192,1)",
+              pointBackgroundColor: "#fff",
+              pointBorderWidth: 10,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "rgba(75,192,192,1)",
+              pointHoverBorderColor: "rgba(220,220,220,1)",
+              pointHoverBorderWidth: 5,
+              pointRadius: 1,
+              pointHitRadius: 10,
+              data: TemA,
+              spanGaps: false,
+            }
             ]},
             options: {
               scales: {
