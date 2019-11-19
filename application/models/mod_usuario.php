@@ -8,12 +8,12 @@
         }
 
         function insertar($data){
-
             //Verificar que no exista otro correo
             $correoDuplicado=$this->db->get_where('usuarios',array('us_correo'=>$data['us_correo']));
             $NumSerDuplicado=$this->db->get_where('usuarios',array('num_ser'=>$data['num_ser']));
+            $TelefonoDuplicado=$this->db->get_where('usuarios',array('us_tel'=>$data['us_tel']));
 
-            if($correoDuplicado->num_rows()>0||$NumSerDuplicado->num_rows()>0){
+            if($correoDuplicado->num_rows()>0||$NumSerDuplicado->num_rows()>0||$TelefonoDuplicado->num_rows()>0){
                 $data['titulo']='Registro';
                 $this->load->view('Usuario/Register',$data);
                 

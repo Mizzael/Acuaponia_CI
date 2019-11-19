@@ -43,9 +43,15 @@
               <input type="password" class="form-control" id="inputPassword4" placeholder="Password" name="confirm_password" required>
             </div>
             </div>
-            <div class="form-group col-md-4 ">
-              <label for="inputState">Número de serie:</label>
-              <input type="text" class="form-control" placeholder="N° serie" name="nserie" autocomplete="off" required>
+            <div class="form-row ">
+              <div class="form-group col-md-6">
+                <label for="inputState">Teléfono</label>
+                <input type="tel" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" placeholder="Teléfono" name="telefono" autocomplete="off" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputState">Número de serie</label>
+                <input type="text" class="form-control" placeholder="N° serie" name="nserie" autocomplete="off" required>
+              </div>
             </div>
             <div class="form-group">
                 <div class="form-check ">
@@ -60,15 +66,14 @@
               <a href="<?php echo base_url(); ?>Usuario/Login">Iniciar sesión</a>
             </p>
           </div>
-          </div>   
-          
+          </div>           
         <div class="row">
           <div class="col-md-12">
             <?php echo validation_errors(); ?>  
           </div>
           <?php echo form_close(); ?>
         </div>
-          
+        <!-- onkeypress='return event.charCode >= 48 && event.charCode <= 57' -->
         <!-- </form> -->
 </body>
 </html>
