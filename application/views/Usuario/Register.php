@@ -59,7 +59,7 @@
                   <label class="form-check-label" for="gridCheck">Acepto términos y condiciones</label>
                 </div>
             </div>
-            <input type="submit" name="commit" value="CREAR UNA CUENTA" tabindex="3" class="btn btn-success  font-weight-bold col-md-4" data-disable-with="Iniciar">
+            <input type="submit" name="commit" value="CREAR UNA CUENTA" class="btn btn-success font-weight-bold col-md-4" data-disable-with="Iniciar">
             <hr class="form-divider">
             <p class="d-flex justify-content-between my-3 col-md font-weight-light">
               Ya tienes una cuenta?

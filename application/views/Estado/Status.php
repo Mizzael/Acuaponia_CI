@@ -21,10 +21,10 @@
     <div class="collapse navbar-collapse mr-auto" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
       </ul>
-      <form class="form-inline mt-2 mt-md-0">
+      <!-- <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-      </form>
+      </form> -->
       <div>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
@@ -41,82 +41,94 @@
 <br>
 <br>
 <br>
-
-<div  class="my-md-8">
+  <div class="text-center">
+    <button class="btn btn-outline-primary my-2 my-sm-0" type="button"  id="BtnObtener">Obtener Datos</button>
+  </div>
   <canvas id="myChart" width="400" height="100"></canvas>
-  <script>
+ 
+ <script>
 
-    var parammeses=["Hola","Enero"];
-    var ctx = $('#myChart');
-    var chart = new Chart(ctx, {
-    type: 'line',
-    data: 
-    {
-      labels: ['January', 'February', 'March', 'April','May'],
-      datasets:
-      [
-        {
-          label: "Edades",
-          fill: true,
-          lineTension: 0.1,
-          backgroundColor: "rgba(75,192,192,0.4)",
-          borderColor: "rgba(75,192,192,1)",
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: "rgba(75,192,192,1)",
-          pointBackgroundColor: "#fff",
-          pointBorderWidth: 10,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "rgba(75,192,192,1)",
-          pointHoverBorderColor: "rgba(220,220,220,1)",
-          pointHoverBorderWidth: 5,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: [10,20,30,40,50,60,70,80],
-          spanGaps: false,
-        },
-        {
-          label: "TemA",
-          fill: true,
-          lineTension: 0.1,
-          backgroundColor: "rgba(75,192,192,0.4)",
-          borderColor: "rgba(75,192,192,1)",
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: "rgba(75,192,192,1)",
-          pointBackgroundColor: "#fff",
-          pointBorderWidth: 10,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "rgba(75,192,192,1)",
-          pointHoverBorderColor: "rgba(220,220,220,1)",
-          pointHoverBorderWidth: 5,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: [60,80,40,40,50,60,70,80],
-          spanGaps: false,
-        }
-      ]
-      // labels: ['January', 'February', 'March', 'April','May'],
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    suggestedMin: 50,
-                    suggestedMax: 100
-                }
-            }]
-        }
-    }
-});
-  </script>
-</div>
-</body>
-</html>
+  var Fecha=[];
+  var TemR=[];
+
+    $('#BtnObtener').click(function(){
+      $.post("<?php echo base_url(); ?>Estado/ObtenerLecturas",
+      function(data){
+        
+        var obj=JSON.parse(data);
+
+        $.each(obj,function(i,item){
+          Fecha.push(item.lec_fechahora);
+          TemR.push(item.lec_TemR);
+        });
+
+        var ctx = $('#myChart');
+        var chart = new Chart(ctx, {
+          type: 'line',
+          data: 
+          {
+            labels: Fecha,
+            datasets:[
+            {
+              label: "TemR",
+              fill: true,
+              lineTension: 0.1,
+              backgroundColor: "rgba(175,192,192,0.4)",
+              borderColor: "rgba(75,192,192,1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "rgba(75,192,192,1)",
+              pointBackgroundColor: "#fff",
+              pointBorderWidth: 10,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "rgba(75,192,192,1)",
+              pointHoverBorderColor: "rgba(220,220,220,1)",
+              pointHoverBorderWidth: 5,
+              pointRadius: 1,
+              pointHitRadius: 10,
+              data: TemR,
+              spanGaps: false,
+            },
+                // {
+                //   label: "TemA",
+                //   fill: true,
+                //   lineTension: 0.1,
+                //   backgroundColor: "rgba(255,99,132,0.4)",
+                //   borderColor: "rgba(75,192,192,1)",
+                //   borderCapStyle: 'butt',
+                //   borderDash: [],
+                //   borderDashOffset: 0.0,
+                //   borderJoinStyle: 'miter',
+                //   pointBorderColor: "rgba(75,192,192,1)",
+                //   pointBackgroundColor: "#fff",
+                //   pointBorderWidth: 10,
+                //   pointHoverRadius: 5,
+                //   pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                //   pointHoverBorderColor: "rgba(220,220,220,1)",
+                //   pointHoverBorderWidth: 5,
+                //   pointRadius: 1,
+                //   pointHitRadius: 10,
+                //   data: [60,80,40,40,80,60,70,80],
+                //   spanGaps: false,
+                // }
+            ]},
+            options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                        suggestedMin: 20,
+                          suggestedMax: 100
+                      }
+                  }]
+              }
+            }
+        });
+      });
+    });
+    
+</script>
     
    
     

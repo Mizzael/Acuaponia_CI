@@ -7,6 +7,7 @@ class Estado extends CI_Controller{
         
         parent::__construct();
         $this->db->initialize();
+        $this->load->model('mod_estado');
     }
 
     public function Capturas(){
@@ -18,6 +19,11 @@ class Estado extends CI_Controller{
                 $this->load->view('Estado/Status',$data);
             $this->load->view('Shared/footer');
         }
+    }
+
+    public function ObtenerLecturas(){
+        $result=$this->mod_estado->ObtenerLecturas();
+        echo json_encode($result);
     }
 }
 ?>
