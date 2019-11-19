@@ -82,19 +82,6 @@ class Usuario extends CI_Controller{
         $data['titulo']='Iniciar Sesión';
         $this->load->view('Usuario/Login',$data);
 
-        // if($this->session->userdata('us_correo')){
-        //     redirect('Usuario/Status');
-        // }
-
-        // if(isset($_POST['password'])){
-        //     if($this->mod_usuario->Ingresar($_POST['correo'],md5($_POST['password']))){
-        //         $this->session->set_userdata('correo',$_POST['correo']);
-        //         redirect(base_url().'Usuario/Status');
-        //     }else{
-        //         redirect(base_url().'Usuario/Login');
-        //     }
-        // }
-
         if ($this->input->post('correo')&&$this->input->post('password')){
             $this->load->model('mod_usuario');
             
@@ -115,7 +102,6 @@ class Usuario extends CI_Controller{
             }          
         }else{
             $this->session->set_flashdata('response', array('message' => 'El correo electrónico y/o contraseña es/son incorrecto(s)'));
-                // redirect('Usuario/index', 'refresh');
         }
 
     }
@@ -133,7 +119,6 @@ class Usuario extends CI_Controller{
         $this->form_validation->set_rules('password','Contraseña','required');
         $this->form_validation->set_rules('nserie','N°Serie','required');
         $this->form_validation->set_rules('telefono','Teléfono','required');
-        // $this->form_validation->set_rules('confirm_password','Confirmar','required');
         $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
        
         if($this->form_validation->run()==false){
@@ -149,10 +134,7 @@ class Usuario extends CI_Controller{
                 'us_clave'=>md5($this->input->post('password')),
                 'num_ser'=>$this->input->post('nserie')
             );
-            $this->mod_usuario->insertar($data);
-
-            
-            // var_dump($data);
+            $this->mod_usuario->insertar($data);            
         }
     }
 }
