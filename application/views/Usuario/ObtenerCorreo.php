@@ -19,11 +19,17 @@
           </div>
 
           <div class="mt-0 mb-1 text-muted">
-            <div>
               <h2 class="mb-4 font-weight-bold">Recupera tú Contraseña</h2>
-            </div>
+              <?php
+                if(isset($response)):
+              ?>  
+              <div class="alert alert-danger text-center">
+                <?php echo($response['message']); ?>
+              </div>
+              <?php
+                endif;
+              ?>
             <div class="text-left form-group">
-
               <div class=" mb-2">
                 <label class="my-0 text-center" for="inputEmail">EMAIL</label>
                 <input type="email" name="correo" id="inputEmail" class="form-control form-control-sm" autocomplete="off" required />

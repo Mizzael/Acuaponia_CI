@@ -15,15 +15,20 @@
       <section>
         <form class="form-signin pr-5 pt-3 pb-3 pl-5 border rounded bg-light" method="POST">
           <div class="separador mb-0">
-            <img class="mb-3" src=" <?php echo base_url(); ?>assets/image/logoPI.png" alt="" width="70" height="85" />
+            <img class="mb-3" src=" <?php echo base_url(); ?>assets/image/logoPI.png" alt="" width="70" height="85"/>
           </div>
-
           <div class="mt-1 mb-1 text-muted">
-            <div>
               <h2 class="mb-4 font-weight-bold">Iniciar sesión</h2>
+            <?php
+              if(isset($response)):
+            ?>  
+            <div class="alert alert-danger text-center">
+              <?php echo($response['message']); ?>
             </div>
+            <?php
+              endif;
+            ?>
             <div class="text-left form-group">
-
               <div class=" mb-2">
                 <label class="my-0 text-center" for="inputEmail">EMAIL</label>
                 <input type="email" name="correo" id="inputEmail" class="form-control form-control-sm" autocomplete="off" required />

@@ -16,6 +16,11 @@ class Usuario extends CI_Controller{
     }
 
     public function ObtenerCorreo(){
+        
+        $data = array(
+            'response' => $this->session->flashdata('response')
+        );
+        
         $data['titulo']='Correo';
             $this->load->view('Usuario/ObtenerCorreo',$data);
             
@@ -38,7 +43,7 @@ class Usuario extends CI_Controller{
                 redirect('Usuario/NuevaPassword', 'redirect');
             }          
         }else{
-            $this->session->set_flashdata('response', array('message' => 'El correo electrónico y/o contraseña es/son incorrecto(s)'));
+            $this->session->set_flashdata('response', array('message' => 'El correo electrónico es incorrecto'));
         }
     }
 
@@ -70,6 +75,10 @@ class Usuario extends CI_Controller{
 
     public function Login(){
         
+        $data = array(
+            'response' => $this->session->flashdata('response')
+        );
+
         $data['titulo']='Iniciar Sesión';
         $this->load->view('Usuario/Login',$data);
 
@@ -106,6 +115,7 @@ class Usuario extends CI_Controller{
             }          
         }else{
             $this->session->set_flashdata('response', array('message' => 'El correo electrónico y/o contraseña es/son incorrecto(s)'));
+                // redirect('Usuario/index', 'refresh');
         }
 
     }
