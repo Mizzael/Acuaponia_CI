@@ -12,6 +12,7 @@
             $correoDuplicado=$this->db->get_where('usuarios',array('us_correo'=>$data['us_correo']));
             $NumSerDuplicado=$this->db->get_where('usuarios',array('num_ser'=>$data['num_ser']));
             $TelefonoDuplicado=$this->db->get_where('usuarios',array('us_tel'=>$data['us_tel']));
+            // var_dump($data);
 
             if($correoDuplicado->num_rows()>0||$NumSerDuplicado->num_rows()>0||$TelefonoDuplicado->num_rows()>0){
                 $data['titulo']='Registro';
@@ -20,9 +21,24 @@
             }else{
                 $this->db->insert('usuarios',$data);
                 
-                $data['titulo']='Estado del Sitema';
-                    $this->load->view('Estado/Status',$data);
-                $this->load->view('Shared/footer');
+                // $data['titulo']='Estado del Sitema';
+                //     $this->load->view('Estado/Status',$data);
+                // $this->load->view('Shared/footer');
+                $usuario = $this->mod_usuario->Login($this->input->post('correo'),md5($this->input->post('password')));
+                    if($usuario){
+                        $this->session->set_userdata(
+                        'user', 
+                        array
+                        (
+                            'id' => $usuario->id_us,
+                            'correo' => $usuario->us_correo,
+                            'nombre' => $usuario->us_nombre
+                        )
+                    );
+                        redirect('Estado/Capturas', 'redirect');
+                }else{
+                    $this->session->set_flashdata('response', array('message' => 'El correo electrónico y/o contraseña es/son incorrecto(s)'));
+                }
             }
         }
 

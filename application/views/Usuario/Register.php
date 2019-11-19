@@ -46,7 +46,7 @@
             <div class="form-row ">
               <div class="form-group col-md-6">
                 <label for="inputState">Teléfono</label>
-                <input type="tel" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" placeholder="Teléfono" name="telefono" autocomplete="off" required>
+                <input type="tel" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  maxlength="10" class="form-control" placeholder="Teléfono" name="telefono" autocomplete="off" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="inputState">Número de serie</label>

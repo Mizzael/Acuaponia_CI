@@ -140,6 +140,9 @@ class Usuario extends CI_Controller{
                 'num_ser'=>$this->input->post('nserie')
             );
             $this->mod_usuario->insertar($data);
+
+            
+            // var_dump($data);
         }
     }
 }
