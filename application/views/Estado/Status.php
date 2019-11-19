@@ -45,13 +45,14 @@
     <button class="btn btn-outline-primary my-2 my-sm-0" type="button"  id="BtnObtener">Obtener Datos</button>
   </div>
 
-  <div>
+  <div id="Grafica">
     <canvas id="myChart" width="400" height="100"></canvas>
   </div>
  <script>
 
   var Fecha=[];
   var TemR=[];
+  var HumR=[];
 
     $('#BtnObtener').click(function(){
       $.post("<?php echo base_url(); ?>Estado/ObtenerLecturas",
@@ -59,11 +60,19 @@
         
         var obj=JSON.parse(data);
 
+        Fecha=[];
+        TemR=[];
+        HumR=[];
+
         $.each(obj,function(i,item){
           Fecha.push(item.lec_fechahora);
           TemR.push(item.lec_TemR);
+          HumR.push(item.lec_HumR);
         });
 
+        $('#myChart').remove();
+        $('#Grafica').append("<canvas id='myChart' width='400' height='100'></canvas>");
+        
         var ctx = $('#myChart');
         var chart = new Chart(ctx, {
           type: 'line',
@@ -72,7 +81,7 @@
             labels: Fecha,
             datasets:[
             {
-              label: "TemR",
+              label: "Temperatura Relativa",
               fill: true,
               lineTension: 0.1,
               backgroundColor: "rgba(175,192,192,0.4)",
@@ -93,28 +102,28 @@
               data: TemR,
               spanGaps: false,
             },
-                // {
-                //   label: "TemA",
-                //   fill: true,
-                //   lineTension: 0.1,
-                //   backgroundColor: "rgba(255,99,132,0.4)",
-                //   borderColor: "rgba(75,192,192,1)",
-                //   borderCapStyle: 'butt',
-                //   borderDash: [],
-                //   borderDashOffset: 0.0,
-                //   borderJoinStyle: 'miter',
-                //   pointBorderColor: "rgba(75,192,192,1)",
-                //   pointBackgroundColor: "#fff",
-                //   pointBorderWidth: 10,
-                //   pointHoverRadius: 5,
-                //   pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                //   pointHoverBorderColor: "rgba(220,220,220,1)",
-                //   pointHoverBorderWidth: 5,
-                //   pointRadius: 1,
-                //   pointHitRadius: 10,
-                //   data: [60,80,40,40,80,60,70,80],
-                //   spanGaps: false,
-                // }
+                {
+                  label: "Humedad Relativa",
+                  fill: true,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(255,99,132,0.4)",
+                  borderColor: "rgba(75,192,192,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(75,192,192,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 10,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 5,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                  data: HumR,
+                  spanGaps: false,
+                }
             ]},
             options: {
               scales: {

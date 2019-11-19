@@ -8,7 +8,7 @@
         }
 
         public function ObtenerLecturas(){
-            $this->db->select('lec_fechahora,lec_TemR');
+            $this->db->select('lec_fechahora,lec_TemR,lec_HumR');
             $this->db->from('lecturas');
 
             $query=$this->db->get();
