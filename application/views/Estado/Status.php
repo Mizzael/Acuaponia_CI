@@ -44,8 +44,10 @@
   <div class="text-center">
     <button class="btn btn-outline-primary my-2 my-sm-0" type="button"  id="BtnObtener">Obtener Datos</button>
   </div>
-  <canvas id="myChart" width="400" height="100"></canvas>
- 
+
+  <div>
+    <canvas id="myChart" width="400" height="100"></canvas>
+  </div>
  <script>
 
   var Fecha=[];
