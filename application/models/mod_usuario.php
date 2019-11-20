@@ -3,7 +3,6 @@
 
         public function __construct(){
             parent::__construct();
-
             $this->db->initialize();
         }
 
@@ -62,9 +61,8 @@
         }
 
         public function NuevaPassword($nuevaPsd){
-        
             $this->db->where('us_clave',$nuevaPsd);
             $query=$this->db->update('usuarios',$nuevaPsd);
         }
-}
+    }
 ?>

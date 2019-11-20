@@ -4,9 +4,9 @@
                 <img src="assets/image/logoPI.png">
                 <div class="col-md-6 px-0">
                     <h1 class="display-4 font-italic text-dark">Gaia-<a class="text-white">System</a></h1><br>
-                      <h3 class="text-dark">Automatizando tu vida, haciendo lo mejor para tí.</h3>
+                      <h3 class="text-dark">Automatizando tu vida, haciendo lo mejor para ti.</h3>
                       <br>
-                      <a href="#" class="btn btn-primary d-flex justify-content-center">Contactanos.</a>
+                      <a href="#" class="btn btn-primary d-flex justify-content-center">Contáctanos.</a>
                 </div>
             </div>
         </div>     
