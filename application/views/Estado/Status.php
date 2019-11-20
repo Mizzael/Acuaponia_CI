@@ -13,34 +13,45 @@
     <title> <?php  echo $titulo ?> | Gaia-System</title>
 </head>
 <body>
-<header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-4">
-    <a href="" class="navbar-brand">
-      <?php echo($this->session->userdata('user')['nombre']); ?> 
-    </a>
-    <div class="collapse navbar-collapse mr-auto" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
-      </ul>
-      <!-- <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-      </form> -->
-      <div>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-4">
+      <a href="" class="navbar-brand">
+        <?php echo($this->session->userdata('user')['nombre']); ?> 
+      </a>
+      <div class="collapse navbar-collapse mr-auto" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url(); ?>Usuario/Logout">Salir</a>
-          </li>
         </ul>
+        <!-- <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form> -->
+        <div>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url(); ?>Usuario/Logout">Salir</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+<br>
+<br>
+  <div class="container-fluid">
+    <div class="row">
+      <nav class=" d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky bg-dark">
+          <nav class="nav flex-column">
+            <a class="nav-link active" href="#">Active</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </nav>
+        </div>
+      </nav>
     </div>
-    </div>
-  </nav>
-</header>
-
-<br>
-<br>
-<br>
-<br>
-<br>
+  </div>     
+  
   <div class="text-center">
     <button class="btn btn-outline-primary my-2 my-sm-0" type="button"  id="BtnObtener">Obtener Lecturas</button>
   </div>
@@ -48,7 +59,7 @@
   <div id="Grafica">
     <canvas id="myChart" width="400" height="100"></canvas>
   </div>
- <script>
+<script>
 
   var Fecha=[];
   var TemR=[];
