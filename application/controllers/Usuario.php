@@ -72,13 +72,11 @@
             $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
         
             if($this->form_validation->run()==FALSE){ 
-                // redirect(base_url().'Usuario/Register');
-                echo 
-                "
-                    <script>
-                        alert('Error en algún campo. Intentalo de nuevo');
-                    </script>
-                ";
+                redirect(base_url().'Usuario/Register');
+                // $data["message_type"] = 1;
+                // $data["message"] = "Below fields required ";
+                // $this->load->view("common/message",$data);
+
             }else{
                 $data=array(
                     'us_nombre'=>$this->input->post('nombre'),

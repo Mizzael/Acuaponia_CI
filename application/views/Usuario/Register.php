@@ -18,6 +18,11 @@
           <?php echo form_open(base_url()."Usuario/AgregarUsuario"); ?>
             <div>
                 <h2 class="mb-4 font-weight-bold">Registrate gratis!</h2>
+                <!-- <?php 
+                  // if(validation_errors() != FALSE){
+                  //   echo "<script>alert('Please check the error marked in red.')</script>"; 
+                   }
+                ?> -->
               </div>
               <div class="form-row ">
               <div class="form-group col-md-6">

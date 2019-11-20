@@ -1,65 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/EstilosAcua.css">
-    <link rel="shortcut icon" href="<?php echo base_url(); ?>/assets/image/logo.ico">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title> <?php  echo $titulo ?> | Gaia-System</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
+  <link rel="shortcut icon" href="<?php echo base_url(); ?>/assets/image/logo.ico">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <title> <?php  echo $titulo ?> | Gaia-System</title>
 </head>
-<body>
-  <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-4">
-      <a href="" class="navbar-brand">
-        <?php echo($this->session->userdata('user')['nombre']); ?> 
-      </a>
-      <div class="collapse navbar-collapse mr-auto" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-        </ul>
-        <!-- <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form> -->
-        <div>
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>Usuario/Logout">Salir</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-<br>
-<br>
-  <div class="container-fluid">
-    <div class="row">
-      <nav class=" d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky bg-dark">
-          <nav class="nav flex-column">
-            <a class="nav-link active" href="#">Active</a>
-            <a class="nav-link" href="#">Link</a>
-            <a class="nav-link" href="#">Link</a>
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </nav>
-        </div>
-      </nav>
-    </div>
-  </div>     
+<body>     
   
-  <div class="text-center">
+  <!-- <div class="text-center">
     <button class="btn btn-outline-primary my-2 my-sm-0" type="button"  id="BtnObtener">Obtener Lecturas</button>
-  </div>
+  </div> -->
 
-  <div id="Grafica">
-    <canvas id="myChart" width="400" height="100"></canvas>
+  
+
+  <div class="wrapper">
+   	<nav id="sidebar">
+   		<div class="sidebar-header">
+   			<h3><?php echo($this->session->userdata('user')['nombre']); ?> </h3>
+   		</div>
+   		
+   		
+   		<ul class="list-unstyled components">
+   			<p>Dummy Heading</p>
+   			<li class="active">
+   				<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+   				<ul class="collapse list-unstyled" id="homeSubmenu">
+   					<li>
+   						<a href="#">home1</a>
+   					</li>
+   					<li>
+   						<a href="#">home2</a>
+   					</li>
+   					<li>
+   						<a href="#">home3</a>
+   					</li>
+   				</ul> 
+   			</li>
+   			
+   			<li>
+   				<a href="#">About</a>
+   			</li>
+   			<li>
+   				<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Page</a>
+   				<ul class="collapse list-unstyled" id="pageSubmenu">
+   					<li>
+   						<a href="#">page1</a>
+   					</li>
+   					<li>
+   						<a href="#">page2</a>
+   					</li>
+   					<li>
+   						<a href="#">page3</a>
+   					</li>
+   				</ul> 
+   			</li>
+   			<li>
+   				<a href="#">Services</a>
+   			</li>
+   			<li>
+   				<a href="<?php echo base_url(); ?>Usuario/Logout">Cerrar Sesión</a>
+   			</li>
+   		</ul>
+   		
+   		<ul class="list-unstyled CTAs">
+   			<li>
+   				<a href="#" class="download">Download code</a>
+   			</li>
+   			<li>
+   				<a href="#" class="article">article</a>
+   			</li>
+   		</ul>
+   	</nav>
+   	
+   	<div class="content">
+   		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+   		
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa fa-align-justify"></i> <span></span>
+                    </button>
+   		
+  <!--<a class="navbar-brand" href="#">Navbar</a> -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
   </div>
+</nav>
+<div class="text-center">
+    <button class="btn btn-outline-primary my-2 my-sm-0" type="button"  id="BtnObtener">Obtener Lecturas</button>
+</div>
+
+<div id="Grafica">
+    <canvas id="myChart" width="400" height="100"></canvas>
+</div>
+  	<h2>Collapsible Sidebar Using Bootstrap 4</h2>
+  	
+  	 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  	
+  	<div class="line"></div>
+  	
+  	<h2>Collapsible Sidebar Using Bootstrap 4</h2>
+  	
+  	 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  	
+  	<div class="line"></div>
+  	<h2>Collapsible Sidebar Using Bootstrap 4</h2>
+  	
+  	 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  	
+  	<div class="line"></div>
+  	
+   	</div>
+   	
+   	
+   	
+   	
+   	
+   </div>
+</body>
+
 <script>
+  $(document).ready(function(){
+    $('#sidebarCollapse').on('click',function(){
+      $('#sidebar').toggleClass('active');
+    });
+  });  
 
   var Fecha=[];
   var TemR=[];
