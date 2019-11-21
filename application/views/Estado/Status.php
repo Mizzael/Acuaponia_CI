@@ -10,147 +10,41 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
   <title> <?php  echo $titulo ?> | Gaia-System</title>
 </head>
 <body>     
-  
-  <!-- <div class="text-center">
-    <button class="btn btn-outline-primary my-2 my-sm-0" type="button"  id="BtnObtener">Obtener Lecturas</button>
-  </div> -->
-
-  
-
   <div class="wrapper">
-   	<nav id="sidebar">
-   		<div class="sidebar-header">
-   			<h3><?php echo($this->session->userdata('user')['nombre']); ?> </h3>
-   		</div>
-   		
-   		
-   		<ul class="list-unstyled components">
-   			<p>Dummy Heading</p>
-   			<li class="active">
-   				<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-   				<ul class="collapse list-unstyled" id="homeSubmenu">
-   					<li>
-   						<a href="#">home1</a>
-   					</li>
-   					<li>
-   						<a href="#">home2</a>
-   					</li>
-   					<li>
-   						<a href="#">home3</a>
-   					</li>
-   				</ul> 
-   			</li>
-   			
-   			<li>
-   				<a href="#">About</a>
-   			</li>
-   			<li>
-   				<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Page</a>
-   				<ul class="collapse list-unstyled" id="pageSubmenu">
-   					<li>
-   						<a href="#">page1</a>
-   					</li>
-   					<li>
-   						<a href="#">page2</a>
-   					</li>
-   					<li>
-   						<a href="#">page3</a>
-   					</li>
-   				</ul> 
-   			</li>
-   			<li>
-   				<a href="#">Services</a>
-   			</li>
-   			<li>
-   				<a href="<?php echo base_url(); ?>Usuario/Logout">Cerrar Sesión</a>
-   			</li>
-   		</ul>
-   		
-   		<ul class="list-unstyled CTAs">
-   			<li>
-   				<a href="#" class="download">Download code</a>
-   			</li>
-   			<li>
-   				<a href="#" class="article">article</a>
-   			</li>
-   		</ul>
-   	</nav>
-   	
-   	<div class="content">
-   		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-   		
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fa fa-align-justify"></i> <span></span>
-                    </button>
-   		
-  <!--<a class="navbar-brand" href="#">Navbar</a> -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
+    <div class="sidebar">
+      <h2><?php echo($this->session->userdata('user')['nombre']); ?></h2>
+        <ul>
+          <li><a><i class="fas fa-home"></i>Home</a></li>
+          
+          <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta Diaria</a></li>
+          <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta Semanal</a></li>
+          <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta Mensual</a></li>
+          
+          <li><a href="#"><i class="far fa-file-alt"></i> Reporte</a></li>
+          <li><a href="<?php echo base_url(); ?>Usuario/Logout"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a></li>
+        </ul> 
+        <!-- <div class="social_media">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div> -->
+      </div>
+      <div class="main_content">
+        <div class="header text-center">Es bueno tenerte de vuelta!</div>  
+          <div class="info">  
+            <div id="Grafica">
+              <canvas id="myChart" width="400" height="100"></canvas>
+            </div>
+        </div>
+      </div>
   </div>
-</nav>
-<div class="text-center">
-    <button class="btn btn-outline-primary my-2 my-sm-0" type="button"  id="BtnObtener">Obtener Lecturas</button>
-</div>
-
-<div id="Grafica">
-    <canvas id="myChart" width="400" height="100"></canvas>
-</div>
-  	<h2>Collapsible Sidebar Using Bootstrap 4</h2>
-  	
-  	 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  	
-  	<div class="line"></div>
-  	
-  	<h2>Collapsible Sidebar Using Bootstrap 4</h2>
-  	
-  	 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  	
-  	<div class="line"></div>
-  	<h2>Collapsible Sidebar Using Bootstrap 4</h2>
-  	
-  	 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  	
-  	<div class="line"></div>
-  	
-   	</div>
-   	
-   	
-   	
-   	
-   	
-   </div>
 </body>
 
 <script>
-  $(document).ready(function(){
-    $('#sidebarCollapse').on('click',function(){
-      $('#sidebar').toggleClass('active');
-    });
-  });  
-
   var Fecha=[];
   var TemR=[];
   var HumR=[];
@@ -160,7 +54,7 @@
   var BgColor=[];
   var BgBorder=[];
 
-    $('#BtnObtener').click(function(){
+    $('.BtnObtener').click(function(){
       $.post("<?php echo base_url(); ?>Estado/ObtenerLecturas",
       function(data){
         
@@ -309,32 +203,3 @@
     });
     
 </script>
-    
-   
-    
-
-<!-- 
-{
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        } -->
