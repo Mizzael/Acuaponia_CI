@@ -18,13 +18,12 @@
     <div class="sidebar">
       <h2><?php echo($this->session->userdata('user')['nombre']); ?></h2>
         <ul>
-          <li><a><i class="fas fa-home"></i>Home</a></li>
-          
+          <!-- <li><a><i class="fas fa-home"></i>Home</a></li> -->
           <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta Diaria</a></li>
           <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta Semanal</a></li>
           <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta Mensual</a></li>
           
-          <li><a href="#"><i class="far fa-file-alt"></i> Reporte</a></li>
+          <li><a href="<?php echo base_url(); ?>Estado/dExcel"><i class="far fa-file-excel"></i> Reporte</a></li>
           <li><a href="<?php echo base_url(); ?>Usuario/Logout"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a></li>
         </ul> 
         <!-- <div class="social_media">
@@ -103,8 +102,8 @@
               label: "Temperatura Tierra",
               fill: true,
               lineTension: 0.1,
-              backgroundColor: BgColor,
-              borderColor: BgBorder,
+              backgroundColor: "rgb(89, 42, 3,0.8)",
+              borderColor: "rgb(89, 42, 3,0.8)",
               borderCapStyle: 'butt',
               borderDash: [],
               borderDashOffset: 0.0,
@@ -125,8 +124,8 @@
               label: "Humedad Ambiente",
               fill: true,
               lineTension: 0.1,
-              backgroundColor: BgColor,
-              borderColor: BgBorder,
+              backgroundColor: "rgb(12, 183, 242,0.8)",
+              borderColor: "rgb(12, 183, 242,0.8)",
               borderCapStyle: 'butt',
               borderDash: [],
               borderDashOffset: 0.0,
@@ -147,8 +146,8 @@
               label: "Humedad Tierra",
               fill: true,
               lineTension: 0.1,
-              backgroundColor: BgColor,
-              borderColor: BgBorder,
+              backgroundColor: "rgb(154, 101, 13,0.8)",
+              borderColor: "rgb(154, 101, 13,0.8)",
               borderCapStyle: 'butt',
               borderDash: [],
               borderDashOffset: 0.0,
@@ -169,8 +168,8 @@
               label: "Temperatura Ambiente",
               fill: true,
               lineTension: 0.1,
-              backgroundColor: BgColor,
-              borderColor: BgBorder,
+              backgroundColor: "rgb(136, 170, 255,0.8)",
+              borderColor: "rgb(136, 170, 255,0.8)",
               borderCapStyle: 'butt',
               borderDash: [],
               borderDashOffset: 0.0,

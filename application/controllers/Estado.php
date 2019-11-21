@@ -7,6 +7,7 @@
             parent::__construct();
             $this->db->initialize();
             $this->load->model('mod_estado');
+            $this->load->library('export_excel');
         }
 
         public function Capturas(){  
@@ -22,6 +23,11 @@
         public function ObtenerLecturas(){
             $result=$this->mod_estado->ObtenerLecturas();
             echo json_encode($result);
+        }
+
+        public function dExcel(){
+            $result=$this->mod_estado->ObtenerDocumento();
+            $this->export_excel->to_excel($result,'Lecturas');
         }
     }
 ?>

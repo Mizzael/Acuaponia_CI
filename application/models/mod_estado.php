@@ -13,5 +13,13 @@
             $query=$this->db->get();
             return $query->result();
         }
+
+        public function ObtenerDocumento(){
+            $this->db->select('lec_fechahora,lec_TemR,lec_HumR,lec_HumT,lec_TemA');
+            $this->db->from('lecturas');
+            $query = $this->db->get();
+                        
+            return $query;
+        }
     }
 ?>
