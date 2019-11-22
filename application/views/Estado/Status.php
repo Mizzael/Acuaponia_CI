@@ -56,7 +56,6 @@
   var BgColor=[];
   var BgBorder=[];
 
-    // $('.BtnObtener').click(function(){
       $.post("<?php echo base_url(); ?>Estado/ObtenerLecturas",
       function(data){
         
@@ -187,7 +186,6 @@
             }
         });
       });
-    // });
     
 </script>
 
