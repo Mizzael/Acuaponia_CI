@@ -19,9 +19,9 @@
       <h2><?php echo($this->session->userdata('user')['nombre']); ?></h2>
         <ul>
           <!-- <li><a><i class="fas fa-home"></i>Home</a></li> -->
-          <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta Diaria</a></li>
-          <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta Semanal</a></li>
-          <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta Mensual</a></li>
+          <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecutas</a></li>
+          <!-- <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta</a></li>
+          <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta Mensual</a></li> -->
           
           <li><a href="<?php echo base_url(); ?>Estado/dExcel"><i class="far fa-file-excel"></i> Reporte</a></li>
           <li><a href="<?php echo base_url(); ?>Usuario/Logout"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a></li>
@@ -35,17 +35,17 @@
       <div class="main_content">
         <div class="header text-center">Es bueno tenerte de vuelta!</div>  
           <div class="info">  
-            <!-- <div id="Grafica">
+            <div id="Grafica">
               <canvas id="myChart" width="400" height="100"></canvas>
-            </div> -->
-            <div id="canvas-container">
+            </div>
+            <!-- <div id="canvas-container">
 		          <canvas id="chart" width="400" height="100"></canvas>
-	          </div>
+	          </div> -->
         </div>
       </div>
   </div>
 </body>
-<!-- 
+
 <script>
   var Fecha=[];
   var TemR=[];
@@ -56,7 +56,7 @@
   var BgColor=[];
   var BgBorder=[];
 
-    $('.BtnObtener').click(function(){
+    // $('.BtnObtener').click(function(){
       $.post("<?php echo base_url(); ?>Estado/ObtenerLecturas",
       function(data){
         
@@ -68,27 +68,12 @@
         HumT=[];
         TemA=[];
 
-        BgColor=[];
-        BgBorder=[];
-
         $.each(obj,function(i,item){
-
-          var r = Math.random() * 255;
-				  r = Math.round(r);
-
-          var g = Math.random() * 255;
-          g = Math.round(g);
-
-          var b = Math.random() * 255;
-          b = Math.round(b);
-
           Fecha.push(item.lec_fechahora);
           TemR.push(item.lec_TemR);
           HumR.push(item.lec_HumR);
           HumT.push(item.lec_HumT);
           TemA.push(item.lec_TemA);
-          BgColor.push('rgba('+r+','+g+','+b+', 0.8)');
-          BgBorder.push('rgba('+r+','+g+','+b+', 1)')
         });
 
         $('#myChart').remove();
@@ -202,30 +187,36 @@
             }
         });
       });
-    });
+    // });
     
-</script> -->
+</script>
 
+
+<!-- 
 <script>
   $(document).ready(function(){
 		
 		var datos = {
-			labels : ["Enero", "Febrero", "Marzo", "Abril", "Mayo"],
+			labels : ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
 			datasets : [{
-				label : "datos 1",
+				label : "Temperatura Ambiente",
 				backgroundColor : "rgba(220,220,220,0.5)",
-				data : [4, 12, 9, 7, 5]
+				data : [4, 12, 9, 7, 5, 4, 12, 9, 7, 5,1,2]
 			},
 			{
-
-				label : "datos 2",
+				label : "Humedad Tierra",
 				backgroundColor : "rgba(151,187,205,0.5)",
-				data : [10,7,-5,6,5]
+				data : [10,7,5,6,5,4, 1, 2, 9, 7, 5,4,8]
 			},
 			{
-				label : "datos 3",
+				label : "Temperatura Tierra",
 				backgroundColor : "rgba(151,100,205,0.5)",
-				data : [9,6,15,6,17]
+				data : [9,6,15,6,17,4, 1, 2, 9, 7, 5,1,2]
+			},
+      {
+				label : "Humedad Ambiente",
+				backgroundColor : "rgba(80,100,205,0.5)",
+				data : [9,6,15,6,17,4, 1, 2, 9, 7, 5,4,6]
 			}
 			]
 		};
@@ -253,24 +244,20 @@
 
 		setInterval(function(){
 			var newData = [
-				[getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],
-				[getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],
-				[getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],				
+				[getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],
+				[getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],
+				[getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],
+        [getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],				
 			];
 
 			$.each(datos.datasets, function(i, dataset){
 				dataset.data = newData[i];
 			});
 			window.bar.update();
-		}, 3000);
-
-		
-
+		}, 5000);
 
 		function getRandom(){
 			return Math.round(Math.random() * 100);
 		}
-
-
 	});
-</script>
+</script> -->
