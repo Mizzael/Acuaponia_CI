@@ -22,10 +22,10 @@
             return $query;
         }
 
-        // public function lista_lecturas($valor){
-        //     $sql="SELECT * FROM lecturas WHERE lec_fechahora LIKE '%".$valor."%' or lec_TemR like '%".$valor."%' ";
-        //     $resultado=$this->db->query
-        // }
+        public function getLecturas($s){
+            $s=$this->db->get_where('lecturas',arra('lec_fechahora'=>$s));
+            return $s->result();
+        }
 
     }
 ?>

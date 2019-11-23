@@ -47,20 +47,16 @@
             echo json_encode($result);
         }
 
-        public function mostrar(){
-            if($this->input->is_ajax_request()){
-                $buscar=$this->input->post("buscar");
-                $datos= $this->mod_estado->mostrar($buscar);
-                echo json_encode($datos);
-            }else{
-                show_404();
-            }
-        }
-
         //Descargar Reporte
         public function dExcel(){
             $result=$this->mod_estado->ObtenerDocumento();
             $this->export_excel->to_excel($result,'Lecturas');
+        }
+
+        public function getLecturas(){
+            $s=$this->input->post('lec_fechahora');
+            $resultado=$this->mod_estado->getLecturas($s);
+           echo json_encode($resultado);
         }
     }
 ?>
