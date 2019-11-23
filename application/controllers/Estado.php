@@ -20,6 +20,16 @@
             }
         }
 
+        public function Lecuturas(){
+            if(!$this->session->has_userdata('user')){
+                redirect(base_url());
+            }else{
+                $data['titulo']='Estado del Sitema';
+                    $this->load->view('Estado/Status',$data);
+                $this->load->view('Shared/footer');
+            }
+        }
+
         public function ObtenerLecturas(){
             $result=$this->mod_estado->ObtenerLecturas();
             echo json_encode($result);
