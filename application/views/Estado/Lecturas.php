@@ -19,7 +19,7 @@
       <h2><?php echo($this->session->userdata('user')['nombre']); ?></h2>
         <ul>
           <!-- <li><a><i class="fas fa-home"></i>Home</a></li> -->
-          <li><a href="<?php echo base_url(); ?>Estado/Lecturas"><i class="far fa-chart-bar"></i> Lecutas</a></li>
+          <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecutas</a></li>
           <!-- <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta</a></li>
           <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta Mensual</a></li> -->
           
@@ -33,19 +33,17 @@
         </div> -->
       </div>
       <div class="main_content">
-        <div class="header text-center">Es bueno tenerte de vuelta!</div>  
+        <div class="header text-center">Lecturas del Sistema</div>  
           <div class="info">  
             
-          <!-- <div id="Grafica">
+          <div id="Grafica">
               <canvas id="myChart" width="400" height="100"></canvas>
-          </div> -->
+          </div>
 
 
-            <div id="canvas-container">
+            <!-- <div id="canvas-container">
 		          <canvas id="chart" width="400" height="100"></canvas>
-            </div>
-
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur dolorem voluptatem, iusto quos odio animi quae magnam fugiat accusantium quibusdam eos, ad alias iste. Commodi laudantium odit quia enim optio?</p>
+            </div> -->
 
         </div>
       </div>
@@ -53,7 +51,7 @@
 </body>
 
 
-<!-- <script>
+<script>
 
   function Grafica(){
     
@@ -199,10 +197,10 @@
     });
   }
       setInterval(Grafica,3000);
-</script> -->
+</script>
 
 
-
+<!-- 
 <script>
   $(document).ready(function(){
 		
@@ -270,5 +268,5 @@
 			return Math.round(Math.random() * 100);
 		}
 	});
-</script>
+</script> -->
 
