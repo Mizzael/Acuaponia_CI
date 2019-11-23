@@ -207,26 +207,27 @@
   $(document).ready(function(){
 		
 		var datos = {
-			labels : ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-			datasets : [{
-				label : "Temperatura Ambiente",
-				backgroundColor : "rgba(220,220,220,0.5)",
-				data : [4, 12, 9, 7, 5, 4, 12, 9, 7, 5,1,2]
-			},
+			labels : ["México", "Grecia", "Cánada", "Estados Unidos"],
+			datasets : [
 			{
-				label : "Humedad Tierra",
+				label : "Conectados",
 				backgroundColor : "rgba(151,187,205,0.5)",
-				data : [10,7,5,6,5,4, 1, 2, 9, 7, 5,4,8]
+				data : [8, 39, 17, 15, 6, 9]
 			},
 			{
-				label : "Temperatura Tierra",
+				label : "Ausentes",
 				backgroundColor : "rgba(151,100,205,0.5)",
-				data : [9,6,15,6,17,4, 1, 2, 9, 7, 5,1,2]
+				data : [15, 19, 47, 25, 8, 10]
 			},
       {
-				label : "Humedad Ambiente",
-				backgroundColor : "rgba(80,100,205,0.5)",
-				data : [9,6,15,6,17,4, 1, 2, 9, 7, 5,4,6]
+				label : "Monitoreando",
+				backgroundColor : "rgba(80,45,205,0.5)",
+				data : [22, 26, 57, 35, 84, 13]
+      },
+      {
+				label : "Desconectados",
+				backgroundColor : "rgba(151,187,205,0.5)",
+				data : [40, 78, 27, 45, 54, 11]
 			}
 			]
 		};
@@ -247,17 +248,17 @@
 				responsive : true,
 				title : {
 					display : true,
-					text : "Estado del Sistema"
+					text : "Estadisticas de Usuarios Globales"
 				}
 			}
 		});
 
 		setInterval(function(){
 			var newData = [
-				[getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],
-				[getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],
-				[getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],
-        [getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],				
+				[getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],
+				[getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],
+        [getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],
+        [getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],			
 			];
 
 			$.each(datos.datasets, function(i, dataset){

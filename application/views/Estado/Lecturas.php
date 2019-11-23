@@ -60,10 +60,6 @@
     var HumR=[];
     var HumT=[];
     var TemA=[];
-
-    var BgColor=[];
-    var BgBorder=[];
-
       
     $.post("<?php echo base_url(); ?>Estado/ObtenerLecturas",
     function(data){
@@ -84,8 +80,8 @@
         TemA.push(item.lec_TemA);
       });
 
-      $('#myChart').remove();
-      $('#Grafica').append("<canvas id='myChart' width='400' height='100'></canvas>");
+      // $('#myChart').remove();
+      // $('#Grafica').append("<canvas id='myChart' width='400' height='100'></canvas>");
       
       var ctx = $('#myChart');
       var chart = new Chart(ctx, {
@@ -196,7 +192,7 @@
       });
     });
   }
-      setInterval(Grafica,3000);
+    setInterval(Grafica,3000);
 </script>
 
 

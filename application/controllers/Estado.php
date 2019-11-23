@@ -25,7 +25,7 @@
             if(!$this->session->has_userdata('user')){
                 redirect(base_url());
             }else{
-                $data['titulo']='Reporte Actual';
+                $data['titulo']='Reporte';
                     $this->load->view('Estado/Reporte',$data);
                 $this->load->view('Shared/footer');
             }
@@ -45,6 +45,16 @@
         public function ObtenerLecturas(){
             $result=$this->mod_estado->ObtenerLecturas();
             echo json_encode($result);
+        }
+
+        public function mostrar(){
+            if($this->input->is_ajax_request()){
+                $buscar=$this->input->post("buscar");
+                $datos= $this->mod_estado->mostrar($buscar);
+                echo json_encode($datos);
+            }else{
+                show_404();
+            }
         }
 
         //Descargar Reporte

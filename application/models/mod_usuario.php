@@ -60,9 +60,9 @@
             return ($query->num_rows() > 0) ? $query->row(0) : false;
         }
 
-        public function NuevaPassword($nuevaPsd){
-            $this->db->where('us_clave',$nuevaPsd);
-            $query=$this->db->update('usuarios',$nuevaPsd);
-        }
+        // public function NuevaPassword($nuevaPsd){
+        //     $this->db->where('us_clave',$nuevaPsd);
+        //     $query=$this->db->update('usuarios',$nuevaPsd);
+        // }
     }
 ?>
