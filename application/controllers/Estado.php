@@ -47,6 +47,12 @@
             echo json_encode($result);
         }
 
+        public function ObtenerLecturasbyFecha(){
+            $text=$this->input->post('texto');
+            $resultado=$this->mod_estado->ObtenerLecturasbyFecha($text);
+            echo json_encode($resultado);
+        }
+
         //Descargar Reporte
         public function dExcel(){
             $result=$this->mod_estado->ObtenerDocumento();

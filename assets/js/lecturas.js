@@ -1,14 +1,3 @@
-// $.post(baseurl.concat("Estado/getLecturas"),
-//     {
-//         id_lectura: 1
-//     },
-//     function (data){
-//         var c=JSON.parse(data);
-//         $.each(c,function(i,item){
-//             $('#cboCiudad').append('<option value="'+item.idciudad+'">'+item.ciudad+'</option>');
-//         });
-//     });
-    
 $("#buscar").click(function(){
     // alert ("Entro aquis");
     var Fecha=[];
@@ -28,8 +17,6 @@ $("#buscar").click(function(){
             </tr>
         </thead>
     `);
-
-    
 
     $.post(baseurl.concat("Estado/ObtenerLecturas"),
         function(data){
@@ -64,4 +51,43 @@ $("#buscar").click(function(){
             });
             
     });
+
+    
 });
+
+$('#filtro').keyup(function(){
+    
+    $("#tablaLecturas").html(`
+        <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Fecha/Hora</th>
+              <th scope="col">Temperatura Tierra °C</th>
+              <th scope="col">Humumedad Relativa %</th>
+              <th scope="col">Hummedad de Tierra %</th>
+              <th scope="col">Temperatura Ambiente °C</th>
+            </tr>
+        </thead>
+    `);
+    
+    var text= ($('#filtro').val());
+    $.post(baseurl.concat("Estado/ObtenerLecturasbyFecha"),
+        {texto:text},
+        function(data){
+            var obj=JSON.parse(data);
+            var output='';
+            $.each(obj,function(i,item){
+                output+=
+                '<tr>'+
+                    '<th scope="row">1</th>'+
+                    '<td>'+item.lec_fechahora+'</td>'+
+                    '<td>'+item.lec_TemR+'</td>'+
+                    '<td>'+item.lec_HumR+'</td>'+
+                    '<td>'+item.lec_HumT+'</td>'+
+                    '<td>'+item.lec_TemA+'</td>'+
+                '</tr>' 
+            });
+            $("#tablaLecturas").append(output);
+        });
+});
+

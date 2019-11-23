@@ -193,7 +193,7 @@
       });
     });
   }
-    setInterval(Grafica,3000);
+    setInterval(Grafica,6000);
 </script>
 
 

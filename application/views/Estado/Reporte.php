@@ -40,7 +40,7 @@
             <button class="btn btn-primary" id="buscar">Mostrar Todo</button>  
           </div>
           <div class="p-2">
-           <input type="text" class="form-control" placeholder="Buscar" name="filtro" autocomplete="off">
+           <input type="text" class="form-control" placeholder="Buscar" id="filtro" autocomplete="off">
           </div>
         </div>
         <table class="table text-center" id="tablaLecturas">

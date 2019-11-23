@@ -14,6 +14,15 @@
             return $query->result();
         }
 
+        public function ObtenerLecturasbyFecha($text)
+        {
+            $this->db->from('lecturas');
+            $this->db->like('lec_fechahora',$text,'both');
+            $r=$this->db->get();
+
+            return $r->result();
+        }
+
         public function ObtenerDocumento(){
             $this->db->select('lec_fechahora,lec_TemR,lec_HumR,lec_HumT,lec_TemA');
             $this->db->from('lecturas');
