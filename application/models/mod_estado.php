@@ -21,11 +21,5 @@
                         
             return $query;
         }
-
-        public function getLecturas($s){
-            $s=$this->db->get_where('lecturas',arra('lec_fechahora'=>$s));
-            return $s->result();
-        }
-
     }
 ?>

@@ -78,6 +78,7 @@
         HumR.push(item.lec_HumR);
         HumT.push(item.lec_HumT);
         TemA.push(item.lec_TemA);
+
       });
 
       // $('#myChart').remove();

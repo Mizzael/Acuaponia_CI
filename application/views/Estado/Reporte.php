@@ -37,13 +37,26 @@
             <li class="btn btn-warning"><a href="<?php echo base_url();?>Estado/dExcel">Obtener Reporte</a></li>
           </div>
           <div class="p-2">
-            <button class="btn btn-primary">Mostrar Todo</button>  
+            <button class="btn btn-primary" id="buscar">Mostrar Todo</button>  
           </div>
           <div class="p-2">
            <input type="text" class="form-control" placeholder="Buscar" name="filtro" autocomplete="off">
           </div>
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus ipsam numquam quibusdam aperiam, obcaecati incidunt, dignissimos reprehenderit delectus voluptas quas suscipit modi fugiat placeat quos laborum excepturi repudiandae provident maiores!</p>
+        <table class="table text-center" id="tablaLecturas">
+          <thead class="thead-dark">
+            <tr>
+            <th scope="col">#</th>
+              <th scope="col">Fecha/Hora</th>
+              <th scope="col">Temperatura Tierra °C</th>
+              <th scope="col">Humumedad Relativa %</th>
+              <th scope="col">Hummedad de Tierra %</th>
+              <th scope="col">Temperatura Ambiente °C</th>
+            </tr>
+          </thead>
+          <tbody> 
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
