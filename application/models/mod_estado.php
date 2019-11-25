@@ -30,5 +30,13 @@
                         
             return $query;
         }
+
+        public function Promedio(){
+          $this->db->select_avg('lec_TemR');
+          $this->db->select_avg('lec_HumR');
+        //   $this->db->from('lecturas');
+          $query = $this->db->get('lecturas');
+          return $query->result();
+        }
     }
 ?>

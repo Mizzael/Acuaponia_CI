@@ -1,4 +1,3 @@
-alert('Bienvenido');
 
 
 $("#buscar").click(function(){
@@ -92,5 +91,20 @@ $('#filtro').keyup(function(){
             });
             $("#tablaLecturas").append(output);
         });
+});
+
+$("#buscar").click(function(){
+    $.post(baseurl.concat("Estado/Promedio"),
+    function(data){
+    // alert(data);
+    var obj=JSON.parse(data);
+
+    $.each(obj,function(i,item){
+        $("#promedio").append(
+            '<p>'+item.lec_TemR+'</p>'+
+            '<p>'+item.lec_HumR+'</p>'
+        );
+    });
+});
 });
 

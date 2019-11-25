@@ -53,6 +53,11 @@
             echo json_encode($resultado);
         }
 
+        public function Promedio(){
+            $result=$this->mod_estado->Promedio();
+            echo json_encode($result);
+        }
+
         //Descargar Reporte
         public function dExcel(){
             $result=$this->mod_estado->ObtenerDocumento();
