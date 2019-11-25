@@ -14,8 +14,7 @@
             return $query->result();
         }
 
-        public function ObtenerLecturasbyFecha($text)
-        {
+        public function ObtenerLecturasbyFecha($text){
             $this->db->from('lecturas');
             $this->db->like('lec_fechahora',$text,'both');
             $r=$this->db->get();
@@ -31,11 +30,18 @@
             return $query;
         }
 
-        public function Promedio(){
+        public function PromedioEnero(){
+            
           $this->db->select_avg('lec_TemR');
           $this->db->select_avg('lec_HumR');
-        //   $this->db->from('lecturas');
+          $this->db->select_avg('lec_HumT');
+          $this->db->select_avg('lec_TemA');
+          $this->db->where(' Month(lec_fechahora)=08');       
           $query = $this->db->get('lecturas');
+            // $query= 'SELECT AVG(lec_TemR)
+            // FROM lecturas
+            // WHERE Month(lec_fechahora)=08';
+            // $resultados = $this->db->query($query);
           return $query->result();
         }
     }

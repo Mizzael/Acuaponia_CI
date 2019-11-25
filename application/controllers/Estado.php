@@ -53,8 +53,9 @@
             echo json_encode($resultado);
         }
 
-        public function Promedio(){
-            $result=$this->mod_estado->Promedio();
+        //Calculando Promedios Mensuales
+        public function PromedioEnero(){
+            $result=$this->mod_estado->PromedioEnero();
             echo json_encode($result);
         }
 

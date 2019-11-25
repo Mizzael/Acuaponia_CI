@@ -1,5 +1,3 @@
-
-
 $("#buscar").click(function(){
     // alert ("Entro aquis");
     var Fecha=[];
@@ -93,18 +91,4 @@ $('#filtro').keyup(function(){
         });
 });
 
-$("#buscar").click(function(){
-    $.post(baseurl.concat("Estado/Promedio"),
-    function(data){
-    // alert(data);
-    var obj=JSON.parse(data);
-
-    $.each(obj,function(i,item){
-        $("#promedio").append(
-            '<p>'+item.lec_TemR+'</p>'+
-            '<p>'+item.lec_HumR+'</p>'
-        );
-    });
-});
-});
 
