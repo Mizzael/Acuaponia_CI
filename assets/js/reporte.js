@@ -1,3 +1,6 @@
+alert('Bienvenido');
+
+
 $("#buscar").click(function(){
     // alert ("Entro aquis");
     var Fecha=[];

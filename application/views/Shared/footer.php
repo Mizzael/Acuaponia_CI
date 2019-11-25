@@ -5,7 +5,7 @@
     
 
     <?php if($this->uri->segment(2)=='Reporte') {?>
-        <script src="<?php echo base_url(); ?>/assets/js/lecturas.js"></script>
+        <script src="<?php echo base_url(); ?>/assets/js/reporte.js"></script>
     <?php } ?>
     
 </html>
