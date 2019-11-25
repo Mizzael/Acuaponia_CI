@@ -33,18 +33,49 @@
         </div> -->
       </div>
       <div class="main_content">
-        <div class="header text-center">Lecturas del Sistema</div>  
+        <div class="header text-center ">Lecturas del Sistema</div>  
           <div class="info">  
-            
-          <div id="Grafica">
+
+            <div class="d-flex text-justify">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="card">
+                    <div class="card-body ">
+                      <h5 class="card-title">Special title treatment</h5>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Special title treatment</h5>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Special title treatment</h5>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div id="Grafica">
               <canvas id="myChart" width="400" height="100"></canvas>
-          </div>
+            </div> -->
 
 
             <!-- <div id="canvas-container">
 		          <canvas id="chart" width="400" height="100"></canvas>
             </div> -->
-
+          </div>
         </div>
       </div>
   </div>
@@ -53,7 +84,7 @@
 
 <script>
 
-  function Grafica(){
+  function GraficaDiaria(){
     
     var Fecha=[];
     var TemR=[];
@@ -193,7 +224,7 @@
       });
     });
   }
-    setInterval(Grafica,6000);
+    setInterval(GraficaDiaria ,6000);
 </script>
 
 

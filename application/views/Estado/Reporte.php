@@ -32,10 +32,10 @@
   <div class="main_content">
     <div class="header text-center">Reportes del Sistema</div>  
       <div class="info">  
-        <p id="promedio">Hola</p>
+        <p id="promedio"></p>
         <div class="d-flex flex-row-reverse ">
           <div class="p-2">
-            <li class="btn btn-warning"><a href="<?php echo base_url();?>Estado/dExcel">Obtener Reporte</a></li>
+           <a class="btn btn-warning" href="<?php echo base_url();?>Estado/dExcel">Obtener Reporte</a>
           </div>
           <div class="p-2">
             <button class="btn btn-primary" id="buscar">Mostrar Todo</button>  
