@@ -32,7 +32,7 @@
                         'user', 
                         array
                         (
-                            'id' => $usuario->id_us,
+                            'id' => $usuario->Id_usuario,
                             'correo' => $usuario->us_correo,
                             'nombre' => $usuario->us_nombre
                         )
@@ -82,9 +82,9 @@
                     'us_nombre'=>$this->input->post('nombre'),
                     'us_apellido'=>$this->input->post('apellido'),
                     'us_correo'=>$this->input->post('correo'),
-                    'us_tel'=>$this->input->post('telefono'),
+                    'us_telefono'=>$this->input->post('telefono'),
                     'us_clave'=>md5($this->input->post('password')),
-                    'num_ser'=>$this->input->post('nserie')
+                    'dis_NoSerie'=>$this->input->post('nserie')
                 );
                 $this->mod_usuario->insertar($data);            
             }
@@ -110,7 +110,7 @@
                         'user', 
                         array
                         (
-                            'id' => $usuario->id_us,
+                            'id' => $usuario->Id_usuario,
                             'correo' => $usuario->us_correo,
                             'nombre' => $usuario->us_nombre
                         )

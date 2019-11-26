@@ -7,10 +7,13 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
   <link rel="shortcut icon" href="<?php echo base_url(); ?>/assets/image/logo.ico">
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
   <title> <?php  echo $titulo ?> | Gaia-System</title>
 </head>
 <body>     
@@ -35,7 +38,6 @@
       <div class="main_content">
         <div class="header text-center ">Lecturas del Sistema</div>  
           <div class="info"> 
-
             <div class="d-flex text-justify">
               <div class="row">
                 <div class="col-sm-4">
@@ -61,14 +63,33 @@
                     <div class="card-body">
                       <h5 class="card-title">Lecturas Mensual</h5>
                       <p class="card-text">Aquí te mostramos el estado mensual de tu sistema.</p>
-                      <a href="#" id="LecturaMensual" class="btn btn-info">Mensual</a>
+                      <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Elije un Mes
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">Ene</a>
+                          <a class="dropdown-item" href="#">Feb</a>
+                          <a class="dropdown-item" href="#">Mar</a>
+                          <a class="dropdown-item" href="#">Abr</a>
+                          <a class="dropdown-item" href="#">May</a>
+                          <a class="dropdown-item" href="#">Jun</a>
+                          <a class="dropdown-item" href="#">Jul</a>
+                          <a class="dropdown-item" id="Mes8" href="#">Ago</a>
+                          <a class="dropdown-item" href="#">Sep</a>
+                          <a class="dropdown-item" href="#">Oct</a>
+                          <a class="dropdown-item" href="#">Nov</a>
+                          <a class="dropdown-item" href="#">Dic</a>
+                        </div>
+                      </div>
+                      <!-- <a href="#" id="LecturaMensual" class="btn btn-info">Mensual</a> -->
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div id="Grafica">
-              <canvas id="myChart" width="400" height="100"></canvas>
+            <div id="GraficaDia">
+              <canvas id="myChart" width="400" height="100"></canvas>                  
             </div>
            <p id="promedio"></p>
 
@@ -84,16 +105,16 @@
 
 <script>
   var baseurl="<?php echo base_url(); ?>";
+  var intervalDiario;
 
-$("#LecturaMensual").click(function(){
-  
-  $('#myChart').remove();
-  $('#Grafica').append("<canvas id='myChart' width='400' height='100'></canvas>");
+$("#Mes8").click(function(){
+  clearInterval(intervalDiario);
     var EneroTemR=[];
     var EneroHumR=[];
     var EneroHumT=[];
     var EneroTemA=[];
-    $.post(baseurl.concat("Estado/PromedioEnero"),
+
+    $.post(baseurl.concat("Estado/PromedioAgo"),
     function(data){
           
           var obj=JSON.parse(data);
@@ -108,17 +129,18 @@ $("#LecturaMensual").click(function(){
             EneroHumR.push(item.lec_HumR);
             EneroHumT.push(item.lec_HumT);
             EneroTemA.push(item.lec_TemA);
-
           });
 
-          
-          
+          $('#myChart').remove();
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
+
           var ctx = $('#myChart');
           var chart = new Chart(ctx, {
             type: 'bar',//Puede variar poniendo line.
             data: 
             {
-              labels: ["Emero","Feb","Mar","Abr"],
+              labels: ["Agosto"],
               datasets:[
               {
                 label: "Temperatura Tierra",
@@ -190,8 +212,8 @@ $("#LecturaMensual").click(function(){
                 label: "Temperatura Ambiente",
                 fill: true,
                 lineTension: 0.1,
-                backgroundColor: "rgba(75, 192, 192, 0.9)",
-                borderColor: "rgba(75, 192, 192, 1)",
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
                 borderCapStyle: 'butt',
                 borderDash: [],
                 borderDashOffset: 0.0,
@@ -214,7 +236,7 @@ $("#LecturaMensual").click(function(){
                     yAxes: [{
                         ticks: {
                           suggestedMin: 20,
-                          suggestedMax: 100
+                          suggestedMax: 50
                         }
                     }]
                 }
@@ -224,8 +246,9 @@ $("#LecturaMensual").click(function(){
 });
   
 $("#LecturaDiaria").click(function(){
-    function GraficaDiaria(){
-        var Fecha=[];
+  intervalDiario = window.setInterval(() => {
+    // console.log("Hola");
+    var Fecha=[];
         var TemR=[];
         var HumR=[];
         var HumT=[];
@@ -242,17 +265,16 @@ $("#LecturaDiaria").click(function(){
           TemA=[];
 
           $.each(obj,function(i,item){
-            Fecha.push(item.lec_fechahora);
+            Fecha.push(item.lec_FechaHora);
             TemR.push(item.lec_TemR);
             HumR.push(item.lec_HumR);
             HumT.push(item.lec_HumT);
             TemA.push(item.lec_TemA);
-
           });
-
-          $('#myChart').remove();
-          $('#Grafica').append("<canvas id='myChart' width='400' height='100'></canvas>");
           
+          $('#myChart').remove();
+    $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
           var ctx = $('#myChart');
           var chart = new Chart(ctx, {
             type: 'bar',//Puede variar poniendo line.
@@ -330,8 +352,8 @@ $("#LecturaDiaria").click(function(){
                 label: "Temperatura Ambiente",
                 fill: true,
                 lineTension: 0.1,
-                backgroundColor: "rgba(75, 192, 192, 0.9)",
-                borderColor: "rgba(75, 192, 192, 1)",
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
                 borderCapStyle: 'butt',
                 borderDash: [],
                 borderDashOffset: 0.0,
@@ -354,7 +376,7 @@ $("#LecturaDiaria").click(function(){
                     yAxes: [{
                         ticks: {
                           suggestedMin: 20,
-                          suggestedMax: 100
+                          suggestedMax: 110
                         }
                     }]
                 }
@@ -362,8 +384,11 @@ $("#LecturaDiaria").click(function(){
           });
         });
      
-    }
-    setInterval(GraficaDiaria ,2000);
+    
+  }, 2000);    
+    // var Refresh=setInterval(GraficaDiaria()=>{
+    //   $('#Grafica').load(lecturas.php);
+    // }, 2000);
 });
 
 </script>

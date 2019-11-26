@@ -23,11 +23,8 @@ $("#buscar").click(function(){
             // alert(data);
             var obj=JSON.parse(data);
 
-            
-            
-
             $.each(obj,function(i,item){
-                Fecha.push(item.lec_fechahora);
+                Fecha.push(item.lec_FechaHora);
                 TemR.push(item.lec_TemR);
                 HumR.push(item.lec_HumR);
                 HumT.push(item.lec_HumT);
@@ -80,7 +77,7 @@ $('#filtro').keyup(function(){
                 output+=
                 '<tr>'+
                     '<th scope="row">1</th>'+
-                    '<td>'+item.lec_fechahora+'</td>'+
+                    '<td>'+item.lec_FechaHora+'</td>'+
                     '<td>'+item.lec_TemR+'</td>'+
                     '<td>'+item.lec_HumR+'</td>'+
                     '<td>'+item.lec_HumT+'</td>'+

@@ -54,15 +54,15 @@
         }
 
         //Calculando Promedios Mensuales
-        public function PromedioEnero(){
-            $result=$this->mod_estado->PromedioEnero();
+        public function PromedioAgo(){
+            $result=$this->mod_estado->PromedioAgo();
             echo json_encode($result);
         }
 
         //Descargar Reporte
         public function dExcel(){
             $result=$this->mod_estado->ObtenerDocumento();
-            $this->export_excel->to_excel($result,'Lecturas');
+            $this->export_excel->to_excel($result,'Lectura');
         }
     }
 ?>

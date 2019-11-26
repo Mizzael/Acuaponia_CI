@@ -9,8 +9,8 @@
         function insertar($data){
             //Verificar que no exista otro correo
             $correoDuplicado=$this->db->get_where('usuarios',array('us_correo'=>$data['us_correo']));
-            $NumSerDuplicado=$this->db->get_where('usuarios',array('num_ser'=>$data['num_ser']));
-            $TelefonoDuplicado=$this->db->get_where('usuarios',array('us_tel'=>$data['us_tel']));
+            $NumSerDuplicado=$this->db->get_where('usuarios',array('dis_NoSerie'=>$data['dis_NoSerie']));
+            $TelefonoDuplicado=$this->db->get_where('usuarios',array('us_telefono'=>$data['us_telefono']));
             // var_dump($data);
 
             if($correoDuplicado->num_rows()>0||$NumSerDuplicado->num_rows()>0||$TelefonoDuplicado->num_rows()>0){
@@ -25,7 +25,7 @@
                         'user', 
                         array
                         (
-                            'id' => $usuario->id_us,
+                            'id' => $usuario->Id_usuario,
                             'correo' => $usuario->us_correo,
                             'nombre' => $usuario->us_nombre
                         )
