@@ -30,19 +30,138 @@
             return $query;
         }
 
-        public function PromedioAgo(){
+
+        //Graficas mensuales
+        public function PromedioEne(){
+            $this->db->select_avg('lec_TemR');
+            $this->db->select_avg('lec_HumR');
+            $this->db->select_avg('lec_HumT');
+            $this->db->select_avg('lec_TemA');
+            $this->db->where(' Month(lec_FechaHora)=1');       
+            $query = $this->db->get('lectura');
+             
+            return $query->result();
+        }
+
+        public function PromedioFeb(){
+            $this->db->select_avg('lec_TemR');
+            $this->db->select_avg('lec_HumR');
+            $this->db->select_avg('lec_HumT');
+            $this->db->select_avg('lec_TemA');
+            $this->db->where(' Month(lec_FechaHora)=2');       
+            $query = $this->db->get('lectura');
+                
+            return $query->result();
+        }
+
+        public function PromedioMar(){
+            $this->db->select_avg('lec_TemR');
+            $this->db->select_avg('lec_HumR');
+            $this->db->select_avg('lec_HumT');
+            $this->db->select_avg('lec_TemA');
+            $this->db->where(' Month(lec_FechaHora)=3');       
+            $query = $this->db->get('lectura');
+                
+            return $query->result();
+        }
+        
+        public function PromedioAbr(){
+            $this->db->select_avg('lec_TemR');
+            $this->db->select_avg('lec_HumR');
+            $this->db->select_avg('lec_HumT');
+            $this->db->select_avg('lec_TemA');
+            $this->db->where(' Month(lec_FechaHora)=4');       
+            $query = $this->db->get('lectura');
+                
+            return $query->result();
+        }
+
+        public function PromedioMay(){
+            $this->db->select_avg('lec_TemR');
+            $this->db->select_avg('lec_HumR');
+            $this->db->select_avg('lec_HumT');
+            $this->db->select_avg('lec_TemA');
+            $this->db->where(' Month(lec_FechaHora)=5');       
+            $query = $this->db->get('lectura');
+                
+            return $query->result();
+        }
+
+        public function PromedioJun(){
+            $this->db->select_avg('lec_TemR');
+            $this->db->select_avg('lec_HumR');
+            $this->db->select_avg('lec_HumT');
+            $this->db->select_avg('lec_TemA');
+            $this->db->where(' Month(lec_FechaHora)=6');       
+            $query = $this->db->get('lectura');
+                
+            return $query->result();
+        }
+
+        public function PromedioJul(){
+            $this->db->select_avg('lec_TemR');
+            $this->db->select_avg('lec_HumR');
+            $this->db->select_avg('lec_HumT');
+            $this->db->select_avg('lec_TemA');
+            $this->db->where(' Month(lec_FechaHora)=7');       
+            $query = $this->db->get('lectura');
+                
+            return $query->result();
+        }
+   
+        public function PromedioAgo(){   
+            $this->db->select_avg('lec_TemR');
+            $this->db->select_avg('lec_HumR');
+            $this->db->select_avg('lec_HumT');
+            $this->db->select_avg('lec_TemA');
+            $this->db->where(' Month(lec_FechaHora)=8');       
+            $query = $this->db->get('lectura');
             
-          $this->db->select_avg('lec_TemR');
-          $this->db->select_avg('lec_HumR');
-          $this->db->select_avg('lec_HumT');
-          $this->db->select_avg('lec_TemA');
-          $this->db->where(' Month(lec_FechaHora)=08');       
-          $query = $this->db->get('lecturas');
-            // $query= 'SELECT AVG(lec_TemR)
-            // FROM lecturas
-            // WHERE Month(lec_fechahora)=08';
-            // $resultados = $this->db->query($query);
-          return $query->result();
+            return $query->result();
+        }
+
+        public function PromedioSep(){
+            $this->db->select_avg('lec_TemR');
+            $this->db->select_avg('lec_HumR');
+            $this->db->select_avg('lec_HumT');
+            $this->db->select_avg('lec_TemA');
+            $this->db->where(' Month(lec_FechaHora)=9');       
+            $query = $this->db->get('lectura');
+                
+            return $query->result();
+        }
+
+        public function PromedioOct(){
+            $this->db->select_avg('lec_TemR');
+            $this->db->select_avg('lec_HumR');
+            $this->db->select_avg('lec_HumT');
+            $this->db->select_avg('lec_TemA');
+            $this->db->where(' Month(lec_FechaHora)=10');       
+            $query = $this->db->get('lectura');
+                
+            return $query->result();
+        }
+
+        public function PromedioNov(){
+            $this->db->select_avg('lec_TemR');
+            $this->db->select_avg('lec_HumR');
+            $this->db->select_avg('lec_HumT');
+            $this->db->select_avg('lec_TemA');
+            $this->db->where(' Month(lec_FechaHora)=11');       
+            $query = $this->db->get('lectura');
+                
+            return $query->result();
+        }
+
+        public function PromedioDic(){
+            $this->db->select_avg('lec_TemR');
+            $this->db->select_avg('lec_HumR');
+            $this->db->select_avg('lec_HumT');
+            $this->db->select_avg('lec_TemA');
+            $this->db->where(' Month(lec_FechaHora)=12');       
+            $query = $this->db->get('lectura');
+                
+            return $query->result();
         }
     }
 ?>

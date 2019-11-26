@@ -54,8 +54,63 @@
         }
 
         //Calculando Promedios Mensuales
+        public function PromedioEne(){
+            $result=$this->mod_estado->PromedioEne();
+            echo json_encode($result);
+        }
+        
+        public function PromedioFeb(){
+            $result=$this->mod_estado->PromedioFeb();
+            echo json_encode($result);
+        }
+
+        public function PromedioMar(){
+            $result=$this->mod_estado->PromedioMar();
+            echo json_encode($result);
+        }
+
+        public function PromedioAbr(){
+            $result=$this->mod_estado->PromedioAbr();
+            echo json_encode($result);
+        }
+
+        public function PromedioMay(){
+            $result=$this->mod_estado->PromedioMay();
+            echo json_encode($result);
+        }
+
+        public function PromedioJun(){
+            $result=$this->mod_estado->PromedioJun();
+            echo json_encode($result);
+        }
+
+        public function PromedioJul(){
+            $result=$this->mod_estado->PromedioJul();
+            echo json_encode($result);
+        }
+        
         public function PromedioAgo(){
             $result=$this->mod_estado->PromedioAgo();
+            echo json_encode($result);
+        }
+
+        public function PromedioSep(){
+            $result=$this->mod_estado->PromedioSep();
+            echo json_encode($result);
+        }
+
+        public function PromedioOct(){
+            $result=$this->mod_estado->PromedioOct();
+            echo json_encode($result);
+        }
+
+        public function PromedioNov(){
+            $result=$this->mod_estado->PromedioNov();
+            echo json_encode($result);
+        }
+
+        public function PromedioDic(){
+            $result=$this->mod_estado->PromedioDic();
             echo json_encode($result);
         }
 

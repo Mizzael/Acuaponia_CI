@@ -22,23 +22,29 @@
       <h2><?php echo($this->session->userdata('user')['nombre']); ?></h2>
         <ul>
           <!-- <li><a><i class="fas fa-home"></i>Home</a></li> -->
-          <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecutas</a></li>
+          <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecturas</a></li>
           <!-- <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta</a></li>
           <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta Mensual</a></li> -->
           
           <li><a href="<?php echo base_url(); ?>Estado/Reporte"><i class="far fa-file-excel"></i> Reporte</a></li>
           <li><a href="<?php echo base_url(); ?>Usuario/Logout"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a></li>
         </ul> 
-        <!-- <div class="social_media">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-        </div> -->
+        <div class="social_media">
+        <a href="https://www.youtube.com/watch?v=FBfkXEUcnus"><i class="fab fa-youtube"></i></a>
+          <a href="https://twitter.com/dedreviil"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/zamora_lo/?hl=es-la"><i class="fab fa-instagram"></i></a>
+          <a href="https://github.com/Mizzael"><i class="fab fa-github"></i></a>
+        </div>
       </div>
       <div class="main_content">
         <div class="header text-center ">Lecturas del Sistema</div>  
           <div class="info"> 
-            <div class="d-flex text-justify">
+            
+            <div id="GraficaDia">
+              <canvas id="myChart" width="400" height="100"></canvas>                  
+            </div>
+
+            <div class="text-justify">
               <div class="row">
                 <div class="col-sm-4">
                   <div class="card">
@@ -68,34 +74,32 @@
                           Elije un Mes
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">Ene</a>
-                          <a class="dropdown-item" href="#">Feb</a>
-                          <a class="dropdown-item" href="#">Mar</a>
-                          <a class="dropdown-item" href="#">Abr</a>
-                          <a class="dropdown-item" href="#">May</a>
-                          <a class="dropdown-item" href="#">Jun</a>
-                          <a class="dropdown-item" href="#">Jul</a>
-                          <a class="dropdown-item" id="Mes8" href="#">Ago</a>
-                          <a class="dropdown-item" href="#">Sep</a>
-                          <a class="dropdown-item" href="#">Oct</a>
-                          <a class="dropdown-item" href="#">Nov</a>
-                          <a class="dropdown-item" href="#">Dic</a>
+                          <li><a class="dropdown-item" id="Mes1" href="#">Ene</a></li>
+                          <li><a class="dropdown-item" id="Mes2" href="#">Feb</a></li>
+                          <li><a class="dropdown-item" id="Mes3" href="#">Mar</a></li>
+                          <li><a class="dropdown-item" id="Mes4" href="#">Abr</a></li>
+                          <li><a class="dropdown-item" id="Mes5" href="#">May</a></li>
+                          <li><a class="dropdown-item" id="Mes6" href="#">Jun</a></li>
+                          <li><a class="dropdown-item" id="Mes7" href="#">Jul</a></li>
+                          <li><a class="dropdown-item" id="Mes8" href="#">Ago</a></li>
+                          <li><a class="dropdown-item" id="Mes9" href="#">Sep</a></li>
+                          <li><a class="dropdown-item" id="Mes10" href="#">Oct</a></li>
+                          <li><a class="dropdown-item" id="Mes11" href="#">Nov</a></li>
+                          <li><a class="dropdown-item" id="Mes12" href="#">Dic</a></li>
                         </div>
                       </div>
-                      <!-- <a href="#" id="LecturaMensual" class="btn btn-info">Mensual</a> -->
+                      <!-- <input type="TextBox" ID="datebox" Class="form-control"></input> -->
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div id="GraficaDia">
-              <canvas id="myChart" width="400" height="100"></canvas>                  
-            </div>
-           <p id="promedio"></p>
-
+            
             <!-- <div id="canvas-container">
-		          <canvas id="chart" width="400" height="100"></canvas>
+              <canvas id="chart"
+               width="400" height="100"></canvas>
             </div> -->
+            
           </div>
         </div>
       </div>
@@ -107,148 +111,13 @@
   var baseurl="<?php echo base_url(); ?>";
   var intervalDiario;
 
-$("#Mes8").click(function(){
-  clearInterval(intervalDiario);
-    var EneroTemR=[];
-    var EneroHumR=[];
-    var EneroHumT=[];
-    var EneroTemA=[];
-
-    $.post(baseurl.concat("Estado/PromedioAgo"),
-    function(data){
-          
-          var obj=JSON.parse(data);
-
-          EneroTemR=[];
-          EneroHumR=[];
-          EneroHumT=[];
-          EneroTemA=[];
-
-          $.each(obj,function(i,item){
-            EneroTemR.push(item.lec_TemR);
-            EneroHumR.push(item.lec_HumR);
-            EneroHumT.push(item.lec_HumT);
-            EneroTemA.push(item.lec_TemA);
-          });
-
-          $('#myChart').remove();
-          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
-
-
-          var ctx = $('#myChart');
-          var chart = new Chart(ctx, {
-            type: 'bar',//Puede variar poniendo line.
-            data: 
-            {
-              labels: ["Agosto"],
-              datasets:[
-              {
-                label: "Temperatura Tierra",
-                fill: true,
-                lineTension: 0.1,
-                backgroundColor: "rgba(255, 99, 132, 0.8)",
-                borderColor: "rgba(255, 99, 132, 0.1)",
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "rgba(75,192,192,1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 10,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                pointHoverBorderColor: "rgba(220,220,220,1)",
-                pointHoverBorderWidth: 5,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: EneroTemR,
-                spanGaps: false,
-              },
-              {
-                label: "Humedad Ambiente",
-                fill: true,
-                lineTension: 0.1,
-                backgroundColor: "rgba(54, 162, 235, 0.8)",
-                borderColor: "rgba(54, 162, 235, 1)",
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "rgba(75,192,192,1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 10,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                pointHoverBorderColor: "rgba(220,220,220,1)",
-                pointHoverBorderWidth: 5,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: EneroHumR,
-                spanGaps: false,
-              },
-              {
-                label: "Humedad Tierra",
-                fill: true,
-                lineTension: 0.1,
-                backgroundColor: "rgba(255, 206, 86, 0.9)",
-                borderColor: "rgba(255, 206, 86, 1)",
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "rgba(75,192,192,1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 10,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                pointHoverBorderColor: "rgba(220,220,220,1)",
-                pointHoverBorderWidth: 5,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: EneroHumT,
-                spanGaps: false,
-              },
-              {
-                label: "Temperatura Ambiente",
-                fill: true,
-                lineTension: 0.1,
-                backgroundColor: "rgba(153, 102, 255, 0.9)",
-                borderColor: "rgba(153, 102, 255, 1)",
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "rgba(75,192,192,1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 10,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                pointHoverBorderColor: "rgba(220,220,220,1)",
-                pointHoverBorderWidth: 5,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: EneroTemA,
-                spanGaps: false,
-              }
-              ]},
-              options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                          suggestedMin: 20,
-                          suggestedMax: 50
-                        }
-                    }]
-                }
-              }
-          });
-        });
-});
-  
+  // $(document).on('click', '.dropdown-menu li a', function() {
+  //   $('#datebox').val($(this).html());
+  // }); 
 $("#LecturaDiaria").click(function(){
-  intervalDiario = window.setInterval(() => {
+  intervalDiario = setInterval(() => {
     // console.log("Hola");
-    var Fecha=[];
+      var Fecha=[];
         var TemR=[];
         var HumR=[];
         var HumT=[];
@@ -273,7 +142,7 @@ $("#LecturaDiaria").click(function(){
           });
           
           $('#myChart').remove();
-    $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
 
           var ctx = $('#myChart');
           var chart = new Chart(ctx, {
@@ -386,9 +255,1710 @@ $("#LecturaDiaria").click(function(){
      
     
   }, 2000);    
-    // var Refresh=setInterval(GraficaDiaria()=>{
-    //   $('#Grafica').load(lecturas.php);
-    // }, 2000);
+});
+
+$("#Mes1").click(function(){
+  clearInterval(intervalDiario);
+  
+    var EneroTemR=[];
+    var EneroHumR=[];
+    var EneroHumT=[];
+    var EneroTemA=[];
+
+    $.post(baseurl.concat("Estado/PromedioEne"),
+    function(data){
+          
+          var obj=JSON.parse(data);
+
+          EneroTemR=[];
+          EneroHumR=[];
+          EneroHumT=[];
+          EneroTemA=[];
+
+          $.each(obj,function(i,item){
+            if(item.lec_TemR<=0){
+              alert('No hay lecturas registradas');
+            }else{
+              EneroTemR.push(item.lec_TemR);
+              EneroHumR.push(item.lec_HumR);
+              EneroHumT.push(item.lec_HumT);
+              EneroTemA.push(item.lec_TemA);
+            }
+          });
+
+          $('#myChart').remove();
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
+          var ctx = $('#myChart');
+          var chart = new Chart(ctx, {
+            type: 'bar',//Puede variar poniendo line.
+            data: 
+            {
+              labels: ["Enero"],
+              datasets:[
+              {
+                label: "Temperatura Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 99, 132, 0.8)",
+                borderColor: "rgba(255, 99, 132, 0.1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 206, 86, 0.9)",
+                borderColor: "rgba(255, 206, 86, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumT,
+                spanGaps: false,
+              },
+              {
+                label: "Temperatura Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemA,
+                spanGaps: false,
+              }
+              ]},
+              options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                          suggestedMin: 20,
+                          suggestedMax: 50
+                        }
+                    }]
+                }
+              }
+          });
+    });
+});
+
+$("#Mes2").click(function(){
+  clearInterval(intervalDiario);
+  
+    var EneroTemR=[];
+    var EneroHumR=[];
+    var EneroHumT=[];
+    var EneroTemA=[];
+
+    $.post(baseurl.concat("Estado/PromedioFeb"),
+    function(data){
+          
+          var obj=JSON.parse(data);
+
+          EneroTemR=[];
+          EneroHumR=[];
+          EneroHumT=[];
+          EneroTemA=[];
+
+          $.each(obj,function(i,item){
+            if(item.lec_TemR<=0){
+              alert('No hay lecturas registradas');
+            }else{
+              EneroTemR.push(item.lec_TemR);
+              EneroHumR.push(item.lec_HumR);
+              EneroHumT.push(item.lec_HumT);
+              EneroTemA.push(item.lec_TemA);
+            }
+          });
+
+          $('#myChart').remove();
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
+          var ctx = $('#myChart');
+          var chart = new Chart(ctx, {
+            type: 'bar',//Puede variar poniendo line.
+            data: 
+            {
+              labels: ["Febrero"],
+              datasets:[
+              {
+                label: "Temperatura Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 99, 132, 0.8)",
+                borderColor: "rgba(255, 99, 132, 0.1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 206, 86, 0.9)",
+                borderColor: "rgba(255, 206, 86, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumT,
+                spanGaps: false,
+              },
+              {
+                label: "Temperatura Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemA,
+                spanGaps: false,
+              }
+              ]},
+              options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                          suggestedMin: 20,
+                          suggestedMax: 50
+                        }
+                    }]
+                }
+              }
+          });
+    });
+});
+
+$("#Mes3").click(function(){
+  clearInterval(intervalDiario);
+  
+    var EneroTemR=[];
+    var EneroHumR=[];
+    var EneroHumT=[];
+    var EneroTemA=[];
+
+    $.post(baseurl.concat("Estado/PromedioMar"),
+    function(data){
+          
+          var obj=JSON.parse(data);
+
+          EneroTemR=[];
+          EneroHumR=[];
+          EneroHumT=[];
+          EneroTemA=[];
+
+          $.each(obj,function(i,item){
+            if(item.lec_TemR<=0){
+              alert('No hay lecturas registradas');
+            }else{
+              EneroTemR.push(item.lec_TemR);
+              EneroHumR.push(item.lec_HumR);
+              EneroHumT.push(item.lec_HumT);
+              EneroTemA.push(item.lec_TemA);
+            }
+          });
+
+          $('#myChart').remove();
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
+          var ctx = $('#myChart');
+          var chart = new Chart(ctx, {
+            type: 'bar',//Puede variar poniendo line.
+            data: 
+            {
+              labels: ["Marzo"],
+              datasets:[
+              {
+                label: "Temperatura Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 99, 132, 0.8)",
+                borderColor: "rgba(255, 99, 132, 0.1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 206, 86, 0.9)",
+                borderColor: "rgba(255, 206, 86, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumT,
+                spanGaps: false,
+              },
+              {
+                label: "Temperatura Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemA,
+                spanGaps: false,
+              }
+              ]},
+              options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                          suggestedMin: 20,
+                          suggestedMax: 50
+                        }
+                    }]
+                }
+              }
+          });
+    });
+});
+
+$("#Mes4").click(function(){
+  clearInterval(intervalDiario);
+  
+    var EneroTemR=[];
+    var EneroHumR=[];
+    var EneroHumT=[];
+    var EneroTemA=[];
+
+    $.post(baseurl.concat("Estado/PromedioAbr"),
+    function(data){
+          
+          var obj=JSON.parse(data);
+
+          EneroTemR=[];
+          EneroHumR=[];
+          EneroHumT=[];
+          EneroTemA=[];
+
+          $.each(obj,function(i,item){
+            if(item.lec_TemR<=0){
+              alert('No hay lecturas registradas');
+            }else{
+              EneroTemR.push(item.lec_TemR);
+              EneroHumR.push(item.lec_HumR);
+              EneroHumT.push(item.lec_HumT);
+              EneroTemA.push(item.lec_TemA);
+            }
+          });
+
+          $('#myChart').remove();
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
+          var ctx = $('#myChart');
+          var chart = new Chart(ctx, {
+            type: 'bar',//Puede variar poniendo line.
+            data: 
+            {
+              labels: ["Abril"],
+              datasets:[
+              {
+                label: "Temperatura Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 99, 132, 0.8)",
+                borderColor: "rgba(255, 99, 132, 0.1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 206, 86, 0.9)",
+                borderColor: "rgba(255, 206, 86, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumT,
+                spanGaps: false,
+              },
+              {
+                label: "Temperatura Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemA,
+                spanGaps: false,
+              }
+              ]},
+              options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                          suggestedMin: 20,
+                          suggestedMax: 50
+                        }
+                    }]
+                }
+              }
+          });
+    });
+});
+
+$("#Mes5").click(function(){
+  clearInterval(intervalDiario);
+  
+    var EneroTemR=[];
+    var EneroHumR=[];
+    var EneroHumT=[];
+    var EneroTemA=[];
+
+    $.post(baseurl.concat("Estado/PromedioMay"),
+    function(data){
+          
+          var obj=JSON.parse(data);
+
+          EneroTemR=[];
+          EneroHumR=[];
+          EneroHumT=[];
+          EneroTemA=[];
+
+          $.each(obj,function(i,item){
+            if(item.lec_TemR<=0){
+              alert('No hay lecturas registradas');
+            }else{
+              EneroTemR.push(item.lec_TemR);
+              EneroHumR.push(item.lec_HumR);
+              EneroHumT.push(item.lec_HumT);
+              EneroTemA.push(item.lec_TemA);
+            }
+          });
+
+          $('#myChart').remove();
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
+          var ctx = $('#myChart');
+          var chart = new Chart(ctx, {
+            type: 'bar',//Puede variar poniendo line.
+            data: 
+            {
+              labels: ["Mayo"],
+              datasets:[
+              {
+                label: "Temperatura Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 99, 132, 0.8)",
+                borderColor: "rgba(255, 99, 132, 0.1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 206, 86, 0.9)",
+                borderColor: "rgba(255, 206, 86, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumT,
+                spanGaps: false,
+              },
+              {
+                label: "Temperatura Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemA,
+                spanGaps: false,
+              }
+              ]},
+              options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                          suggestedMin: 20,
+                          suggestedMax: 50
+                        }
+                    }]
+                }
+              }
+          });
+    });
+});
+
+$("#Mes6").click(function(){
+  clearInterval(intervalDiario);
+  
+    var EneroTemR=[];
+    var EneroHumR=[];
+    var EneroHumT=[];
+    var EneroTemA=[];
+
+    $.post(baseurl.concat("Estado/PromedioJun"),
+    function(data){
+          
+          var obj=JSON.parse(data);
+
+          EneroTemR=[];
+          EneroHumR=[];
+          EneroHumT=[];
+          EneroTemA=[];
+
+          $.each(obj,function(i,item){
+            if(item.lec_TemR<=0){
+              alert('No hay lecturas registradas');
+            }else{
+              EneroTemR.push(item.lec_TemR);
+              EneroHumR.push(item.lec_HumR);
+              EneroHumT.push(item.lec_HumT);
+              EneroTemA.push(item.lec_TemA);
+            }
+          });
+
+          $('#myChart').remove();
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
+          var ctx = $('#myChart');
+          var chart = new Chart(ctx, {
+            type: 'bar',//Puede variar poniendo line.
+            data: 
+            {
+              labels: ["Junio"],
+              datasets:[
+              {
+                label: "Temperatura Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 99, 132, 0.8)",
+                borderColor: "rgba(255, 99, 132, 0.1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 206, 86, 0.9)",
+                borderColor: "rgba(255, 206, 86, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumT,
+                spanGaps: false,
+              },
+              {
+                label: "Temperatura Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemA,
+                spanGaps: false,
+              }
+              ]},
+              options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                          suggestedMin: 20,
+                          suggestedMax: 50
+                        }
+                    }]
+                }
+              }
+          });
+    });
+});
+
+$("#Mes7").click(function(){
+  clearInterval(intervalDiario);
+  
+    var EneroTemR=[];
+    var EneroHumR=[];
+    var EneroHumT=[];
+    var EneroTemA=[];
+
+    $.post(baseurl.concat("Estado/PromedioJul"),
+    function(data){
+          
+          var obj=JSON.parse(data);
+
+          EneroTemR=[];
+          EneroHumR=[];
+          EneroHumT=[];
+          EneroTemA=[];
+
+          $.each(obj,function(i,item){
+            if(item.lec_TemR<=0){
+              alert('No hay lecturas registradas');
+            }else{
+              EneroTemR.push(item.lec_TemR);
+              EneroHumR.push(item.lec_HumR);
+              EneroHumT.push(item.lec_HumT);
+              EneroTemA.push(item.lec_TemA);
+            }
+          });
+
+          $('#myChart').remove();
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
+          var ctx = $('#myChart');
+          var chart = new Chart(ctx, {
+            type: 'bar',//Puede variar poniendo line.
+            data: 
+            {
+              labels: ["Julio"],
+              datasets:[
+              {
+                label: "Temperatura Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 99, 132, 0.8)",
+                borderColor: "rgba(255, 99, 132, 0.1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 206, 86, 0.9)",
+                borderColor: "rgba(255, 206, 86, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumT,
+                spanGaps: false,
+              },
+              {
+                label: "Temperatura Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemA,
+                spanGaps: false,
+              }
+              ]},
+              options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                          suggestedMin: 20,
+                          suggestedMax: 50
+                        }
+                    }]
+                }
+              }
+          });
+    });
+});
+
+$("#Mes8").click(function(){
+  clearInterval(intervalDiario);
+  
+    var EneroTemR=[];
+    var EneroHumR=[];
+    var EneroHumT=[];
+    var EneroTemA=[];
+
+    $.post(baseurl.concat("Estado/PromedioAgo"),
+    function(data){
+          
+          var obj=JSON.parse(data);
+
+          EneroTemR=[];
+          EneroHumR=[];
+          EneroHumT=[];
+          EneroTemA=[];
+
+          $.each(obj,function(i,item){
+            if(item.lec_TemR<=0){
+              alert('No hay lecturas registradas');
+            }else{
+              EneroTemR.push(item.lec_TemR);
+              EneroHumR.push(item.lec_HumR);
+              EneroHumT.push(item.lec_HumT);
+              EneroTemA.push(item.lec_TemA);
+            }
+          });
+
+          $('#myChart').remove();
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
+          var ctx = $('#myChart');
+          var chart = new Chart(ctx, {
+            type: 'bar',//Puede variar poniendo line.
+            data: 
+            {
+              labels: ["Agosto"],
+              datasets:[
+              {
+                label: "Temperatura Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 99, 132, 0.8)",
+                borderColor: "rgba(255, 99, 132, 0.1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 206, 86, 0.9)",
+                borderColor: "rgba(255, 206, 86, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumT,
+                spanGaps: false,
+              },
+              {
+                label: "Temperatura Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemA,
+                spanGaps: false,
+              }
+              ]},
+              options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                          suggestedMin: 20,
+                          suggestedMax: 50
+                        }
+                    }]
+                }
+              }
+          });
+    });
+});
+
+$("#Mes9").click(function(){
+  clearInterval(intervalDiario);
+  
+    var EneroTemR=[];
+    var EneroHumR=[];
+    var EneroHumT=[];
+    var EneroTemA=[];
+
+    $.post(baseurl.concat("Estado/PromedioSep"),
+    function(data){
+          
+          var obj=JSON.parse(data);
+
+          EneroTemR=[];
+          EneroHumR=[];
+          EneroHumT=[];
+          EneroTemA=[];
+
+          $.each(obj,function(i,item){
+            if(item.lec_TemR<=0){
+              alert('No hay lecturas registradas');
+            }else{
+              EneroTemR.push(item.lec_TemR);
+              EneroHumR.push(item.lec_HumR);
+              EneroHumT.push(item.lec_HumT);
+              EneroTemA.push(item.lec_TemA);
+            }
+          });
+
+          $('#myChart').remove();
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
+          var ctx = $('#myChart');
+          var chart = new Chart(ctx, {
+            type: 'bar',//Puede variar poniendo line.
+            data: 
+            {
+              labels: ["Septiembre"],
+              datasets:[
+              {
+                label: "Temperatura Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 99, 132, 0.8)",
+                borderColor: "rgba(255, 99, 132, 0.1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 206, 86, 0.9)",
+                borderColor: "rgba(255, 206, 86, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumT,
+                spanGaps: false,
+              },
+              {
+                label: "Temperatura Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemA,
+                spanGaps: false,
+              }
+              ]},
+              options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                          suggestedMin: 20,
+                          suggestedMax: 50
+                        }
+                    }]
+                }
+              }
+          });
+    });
+});
+
+$("#Mes10").click(function(){
+  clearInterval(intervalDiario);
+  
+    var EneroTemR=[];
+    var EneroHumR=[];
+    var EneroHumT=[];
+    var EneroTemA=[];
+
+    $.post(baseurl.concat("Estado/PromedioOct"),
+    function(data){
+          
+          var obj=JSON.parse(data);
+
+          EneroTemR=[];
+          EneroHumR=[];
+          EneroHumT=[];
+          EneroTemA=[];
+
+          $.each(obj,function(i,item){
+            if(item.lec_TemR<=0){
+              alert('No hay lecturas registradas');
+            }else{
+              EneroTemR.push(item.lec_TemR);
+              EneroHumR.push(item.lec_HumR);
+              EneroHumT.push(item.lec_HumT);
+              EneroTemA.push(item.lec_TemA);
+            }
+          });
+
+          $('#myChart').remove();
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
+          var ctx = $('#myChart');
+          var chart = new Chart(ctx, {
+            type: 'bar',//Puede variar poniendo line.
+            data: 
+            {
+              labels: ["Octubre"],
+              datasets:[
+              {
+                label: "Temperatura Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 99, 132, 0.8)",
+                borderColor: "rgba(255, 99, 132, 0.1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 206, 86, 0.9)",
+                borderColor: "rgba(255, 206, 86, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumT,
+                spanGaps: false,
+              },
+              {
+                label: "Temperatura Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemA,
+                spanGaps: false,
+              }
+              ]},
+              options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                          suggestedMin: 20,
+                          suggestedMax: 50
+                        }
+                    }]
+                }
+              }
+          });
+    });
+});
+
+$("#Mes11").click(function(){
+  clearInterval(intervalDiario);
+  
+    var EneroTemR=[];
+    var EneroHumR=[];
+    var EneroHumT=[];
+    var EneroTemA=[];
+
+    $.post(baseurl.concat("Estado/PromedioNov"),
+    function(data){
+          
+          var obj=JSON.parse(data);
+
+          EneroTemR=[];
+          EneroHumR=[];
+          EneroHumT=[];
+          EneroTemA=[];
+
+          $.each(obj,function(i,item){
+            if(item.lec_TemR<=0){
+              alert('No hay lecturas registradas');
+            }else{
+              EneroTemR.push(item.lec_TemR);
+              EneroHumR.push(item.lec_HumR);
+              EneroHumT.push(item.lec_HumT);
+              EneroTemA.push(item.lec_TemA);
+            }
+          });
+
+          $('#myChart').remove();
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
+          var ctx = $('#myChart');
+          var chart = new Chart(ctx, {
+            type: 'bar',//Puede variar poniendo line.
+            data: 
+            {
+              labels: ["Noviembre"],
+              datasets:[
+              {
+                label: "Temperatura Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 99, 132, 0.8)",
+                borderColor: "rgba(255, 99, 132, 0.1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 206, 86, 0.9)",
+                borderColor: "rgba(255, 206, 86, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumT,
+                spanGaps: false,
+              },
+              {
+                label: "Temperatura Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemA,
+                spanGaps: false,
+              }
+              ]},
+              options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                          suggestedMin: 20,
+                          suggestedMax: 50
+                        }
+                    }]
+                }
+              }
+          });
+    });
+});
+
+$("#Mes12").click(function(){
+  clearInterval(intervalDiario);
+  
+    var EneroTemR=[];
+    var EneroHumR=[];
+    var EneroHumT=[];
+    var EneroTemA=[];
+
+    $.post(baseurl.concat("Estado/PromedioDic"),
+    function(data){
+          
+          var obj=JSON.parse(data);
+
+          EneroTemR=[];
+          EneroHumR=[];
+          EneroHumT=[];
+          EneroTemA=[];
+
+          $.each(obj,function(i,item){
+            if(item.lec_TemR<=0){
+              alert('No hay lecturas registradas');
+            }else{
+              EneroTemR.push(item.lec_TemR);
+              EneroHumR.push(item.lec_HumR);
+              EneroHumT.push(item.lec_HumT);
+              EneroTemA.push(item.lec_TemA);
+            }
+          });
+
+          $('#myChart').remove();
+          $('#GraficaDia').append("<canvas id='myChart' width='400' height='100'></canvas>");
+
+          var ctx = $('#myChart');
+          var chart = new Chart(ctx, {
+            type: 'bar',//Puede variar poniendo line.
+            data: 
+            {
+              labels: ["Diciembre"],
+              datasets:[
+              {
+                label: "Temperatura Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 99, 132, 0.8)",
+                borderColor: "rgba(255, 99, 132, 0.1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumR,
+                spanGaps: false,
+              },
+              {
+                label: "Humedad Tierra",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(255, 206, 86, 0.9)",
+                borderColor: "rgba(255, 206, 86, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroHumT,
+                spanGaps: false,
+              },
+              {
+                label: "Temperatura Ambiente",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(153, 102, 255, 0.9)",
+                borderColor: "rgba(153, 102, 255, 1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 5,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: EneroTemA,
+                spanGaps: false,
+              }
+              ]},
+              options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                          suggestedMin: 20,
+                          suggestedMax: 50
+                        }
+                    }]
+                }
+              }
+          });
+    });
 });
 
 </script>
