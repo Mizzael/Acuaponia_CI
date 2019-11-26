@@ -40,6 +40,16 @@
                 $this->load->view('Shared/footer');
             }
         }
+
+        public function Configuracion(){
+            if(!$this->session->has_userdata('user')){
+                redirect(base_url());
+            }else{
+                $data['titulo']='Configuración';
+                    $this->load->view('Estado/Configuracion',$data);
+                $this->load->view('Shared/footer');
+            }
+        }
         
         //Para graficar
         public function ObtenerLecturas(){

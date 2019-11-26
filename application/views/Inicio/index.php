@@ -15,9 +15,9 @@
                     <div class="collapse navbar-collapse container marketing" id="navbarNavAltMarkup">
                         <div class="navbar-nav ">
                           <a class="nav-item nav-link active text-black font-weight-bold" href="#">Inicio <span class="sr-only">(current)</span> </a>
-                          <a class="nav-item nav-link text-black font-weight-bold" href="#">¿Quiénes somos?</a>
-                          <a class="nav-item nav-link text-black font-weight-bold" href="#">Producto</a>
-                          <a class="nav-item nav-link text-black font-weight-bold" href="#">Contacto</a>
+                          <a class="nav-item nav-link text-black font-weight-bold" href="#QS">¿Quiénes somos?</a>
+                          <a class="nav-item nav-link text-black font-weight-bold" href="#Producto">Producto</a>
+                          <a class="nav-item nav-link text-black font-weight-bold" href="#Contacto">Contacto</a>
                     </div>
                     <div class="p-2 bd-highlight">
                             <a href="<?php echo base_url(); ?>Usuario/Login" class="btn btn-success">Iniciar sesión</a>
@@ -57,7 +57,7 @@
           <hr class="featurette-divider">
           <div class="row featurette">
             <div class="col-md-7">
-              <h2 class="featurette-heading">¿Quiénes somos? </h2>
+              <h2 class="featurette-heading" id="QS">¿Quiénes somos? </h2>
               <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
             </div>
             <div class="col-md-5">
@@ -68,7 +68,7 @@
           <hr class="featurette-divider">
           <div class="row featurette">
             <div class="col-md-7 order-md-2">
-              <h2 class="featurette-heading">Producto</h2>
+              <h2 class="featurette-heading" id="Producto">Producto</h2>
               <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
             </div>
             <div class="col-md-5 order-md-1">
@@ -79,7 +79,7 @@
           <hr class="featurette-divider">
           <div class="row featurette">
             <div class="col-md-7">
-              <h2 class="featurette-heading">Contacto</h2>
+              <h2 class="featurette-heading" id="Contacto">Contacto</h2>
               <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
             </div>
             <div class="col-md-5">
