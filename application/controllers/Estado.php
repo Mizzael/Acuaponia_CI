@@ -53,7 +53,12 @@
             echo json_encode($resultado);
         }
 
-        //Calculando Promedios Mensuales
+        //Calculando Promedios Mensuales y Semanal
+        public function GraficaSemanal(){
+            $result=$this->mod_estado->GraficaSemanal();
+            echo json_encode($result);
+        }
+
         public function PromedioEne(){
             $result=$this->mod_estado->PromedioEne();
             echo json_encode($result);

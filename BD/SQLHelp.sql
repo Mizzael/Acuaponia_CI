@@ -1,10 +1,3 @@
-SELECT AVG(lec_TemR),AVG(lec_HumR)  FROM lecturas 
-
-select *
-  from lecturas
- order by id_lectura desc
- limit 1;
-
 //ultimo dato almacenado
  SELECT lec_TemR
  from lecturas
@@ -22,7 +15,9 @@ FROM lecturas
 WHERE Month(lec_fechahora)
 
 //Fallar
-SELECT AVG(lec_TemR)
-FROM lecturas
-WHERE lec_fechahora
-LIKE '%Aug%'
+select *
+from lectura
+where lec_fechahora between '2019-11-01' and '2019-11-30';
+
+
+SELECT * FROM lectura WHERE lec_fechahora<NOW()

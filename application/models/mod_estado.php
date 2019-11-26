@@ -7,7 +7,7 @@
         }
 
         public function ObtenerLecturas(){
-            $this->db->select('lec_FechaHora,lec_TemR,lec_HumR,lec_HumT,lec_TemA');
+            $this->db->select('id,lec_FechaHora,lec_TemR,lec_HumR,lec_HumT,lec_TemA');
             $this->db->from('lectura');
             
             $query=$this->db->get();
@@ -30,8 +30,19 @@
             return $query;
         }
 
+        //Graficas mensuales y Semanal
+        public function GraficaSemanal(){
+            $this->db->select_avg('lec_TemR');
+            $this->db->select_avg('lec_HumR');
+            $this->db->select_avg('lec_HumT');
+            $this->db->select_avg('lec_TemA');    
+            $query = $this->db->get('lectura');
+             
+            return $query->result();
+        
+        }
 
-        //Graficas mensuales
+
         public function PromedioEne(){
             $this->db->select_avg('lec_TemR');
             $this->db->select_avg('lec_HumR');

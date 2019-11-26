@@ -24,13 +24,14 @@
           <li><a class="BtnObtener"><i class="far fa-chart-bar"></i> Lecuta Mensual</a></li> -->
           
           <li><a href="<?php echo base_url(); ?>Estado/Reporte"><i class="far fa-file-excel"></i> Reporte</a></li>
+          <li><a href="<?php echo base_url(); ?>Estado/Configuracion""><i class="fas fa-tools"></i>Configuración</a></li>
           <li><a href="<?php echo base_url(); ?>Usuario/Logout"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a></li>
         </ul> 
         <div class="social_media">
-          <a href="https://www.youtube.com/watch?v=FBfkXEUcnus"><i class="fab fa-youtube"></i></a>
-          <a href="https://twitter.com/dedreviil"><i class="fab fa-twitter"></i></a>
-          <a href="https://www.instagram.com/zamora_lo/?hl=es-la"><i class="fab fa-instagram"></i></a>
-          <a href="https://github.com/Mizzael"><i class="fab fa-github"></i></a>
+          <a href="https://www.youtube.com/watch?v=FBfkXEUcnus" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="https://twitter.com/dedreviil" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/zamora_lo/?hl=es-la" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://github.com/Mizzael" target="_blank"><i class="fab fa-github"></i></a>
         </div>
       </div>
       <div class="main_content">

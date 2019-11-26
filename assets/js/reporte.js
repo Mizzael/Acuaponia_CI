@@ -1,5 +1,6 @@
 $("#buscar").click(function(){
-    // alert ("Entro aquis");
+    // alert ("Entro aquis");\
+    var id=[];
     var Fecha=[];
     var TemR=[];
     var HumR=[];
@@ -24,6 +25,7 @@ $("#buscar").click(function(){
             var obj=JSON.parse(data);
 
             $.each(obj,function(i,item){
+                id.push(item.id);
                 Fecha.push(item.lec_FechaHora);
                 TemR.push(item.lec_TemR);
                 HumR.push(item.lec_HumR);
@@ -32,7 +34,7 @@ $("#buscar").click(function(){
 
                 $("#tablaLecturas").append(
                     '<tr>'+
-                      '<th scope="row">1</th>'+
+                      '<th scope="row">'+id+'</th>'+
                       '<td>'+Fecha+'</td>'+
                       '<td>'+TemR+'</td>'+
                       '<td>'+HumR+'</td>'+
@@ -40,6 +42,7 @@ $("#buscar").click(function(){
                       '<td>'+TemA+'</td>'+
                     '</tr>'  
                   );
+                  id=[];
                   Fecha=[];
                   TemR=[];
                   HumR=[];
@@ -76,7 +79,7 @@ $('#filtro').keyup(function(){
             $.each(obj,function(i,item){
                 output+=
                 '<tr>'+
-                    '<th scope="row">1</th>'+
+                    '<th scope="row">'+item.id+'</th>'+
                     '<td>'+item.lec_FechaHora+'</td>'+
                     '<td>'+item.lec_TemR+'</td>'+
                     '<td>'+item.lec_HumR+'</td>'+
